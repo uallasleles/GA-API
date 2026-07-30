@@ -21,7 +21,7 @@ instant_client_dir = None
 # o diretório do Instant Client.  Observe o uso da string bruta r"..." para 
 # que barras invertidas possam ser usadas como separadores de diretório.
 if platform.system() == "Windows":
-    instant_client_dir = r"C:\Users\uallas.pereira\OneDrive\Code\RepomFrete\lib\Oracle\instantclient_23_0"
+    instant_client_dir = r"C:\Users\uallas.pereira\OneDrive\Code\GA-API\lib\Oracle\instantclient_23_0"
 
 # No macOS, defina o diretório para o diretório do Instant Client
 if platform.system() == "Darwin":

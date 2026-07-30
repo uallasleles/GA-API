@@ -15,7 +15,7 @@ class Logger():
     def add(self, type, message):
         
         json = {
-            "app_name" : "RepomFrete",
+            "app_name" : "GA-API",
             "file_name" : sys.argv[0],
             "type" :type,
             "log" : message

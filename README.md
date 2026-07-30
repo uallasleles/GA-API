@@ -26,7 +26,9 @@ docker run --rm -p 8088:8088 --network ga_api_test_net \
 
 Acesse `http://localhost:8088/docs`. O `entrypoint.sh` roda `alembic upgrade head` (cria a tabela `user` e semeia os usuários existentes) antes de subir o Uvicorn.
 
-## Deploy no Swarm
+## Deploy (via Portainer)
+
+O deploy desta stack é gerenciado pelo Portainer, não por `docker stack deploy` direto na linha de comando.
 
 A stack (`docker-compose.yml`) sobe dois serviços:
 
@@ -35,17 +37,15 @@ A stack (`docker-compose.yml`) sobe dois serviços:
 
 `ga-api` se conecta à rede externa `network_public` (nome real do Docker: `minha_rede`), já usada pelo Traefik. O label `traefik.docker.network=minha_rede` usa o nome real da rede (necessário porque o serviço está em duas redes — a pública e a interna do Postgres — e o Traefik precisa saber qual delas usar).
 
-1. Buildar e publicar a imagem em um registry acessível pela VM (ou buildar direto na VM/manager node):
-   ```bash
-   docker build -t ga-api:latest .
-   ```
-2. Garantir que o arquivo `.env` (baseado no `.env.example`) esteja na mesma pasta do `docker-compose.yml` no manager node — o `docker stack deploy` usa esse `.env` para interpolar as variáveis `${...}` do compose. (Alternativa: colar as mesmas variáveis na tela de "Environment variables" do stack no Portainer.)
-3. Deploy:
-   ```bash
-   docker stack deploy -c docker-compose.yml ga-api
-   ```
+1. **Buildar a imagem `ga-api:latest`** — precisa estar disponível para o(s) node(s) do Swarm antes do deploy da stack, já que o `docker-compose.yml` referencia `image: ga-api:latest` (não builda a partir do Dockerfile). Duas opções:
+   - Portainer → **Images → Build a new image**, apontando para este repositório (ou fazendo upload do contexto), com tag `ga-api:latest`; ou
+   - `docker build -t ga-api:latest .` direto no manager node (via SSH), se o Portainer estiver rodando no mesmo host/cluster.
+2. No Portainer, ir em **Stacks → Add stack**:
+   - **Repository**: apontar para este repositório Git (`https://github.com/uallasleles/GA-API`), arquivo `docker-compose.yml`; ou colar o conteúdo do compose diretamente.
+   - **Environment variables**: preencher todas as variáveis listadas em [.env.example](.env.example) (não usa o `.env` do repositório — o Portainer não lê arquivos `.env` do working directory local, as variáveis são cadastradas na própria UI da stack).
+3. **Deploy the stack**. Redeploys subsequentes (após alterar código/compose) são feitos pela mesma tela, com **Pull and redeploy** se a imagem também foi atualizada.
 
-Para rodar migrations manualmente (ex.: depois de alterar modelos), sem esperar o próximo redeploy:
+Para rodar migrations manualmente (ex.: depois de alterar modelos), sem esperar o próximo redeploy — via **Containers → ga-api → Console** no Portainer, ou por SSH:
 ```bash
 docker exec -it $(docker ps -qf name=ga-api_ga-api) alembic upgrade head
 ```
