@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   ga-api:
-    image: ga-api:latest
+    image: ghcr.io/uallasleles/ga-api:latest
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
