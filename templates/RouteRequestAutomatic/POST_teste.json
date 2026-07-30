@@ -1,0 +1,88 @@
+[
+    {
+        "Identifier": 39776,
+        "Country": "55",
+        "HiredCountry": "55",
+        "HiredNationalId": "62003375000162",
+        "OperationIdentifier": 1,
+        "CardNumber": "700021821",
+        "VPRCardNumber": 0,
+        "BrazilianRouteTraceCode": "2",
+        "BrazilianRouteRouteCode": "51148",
+        "IssueDate": "2026-03-16T09:10:16Z",
+        "TotalFreightValue": 0.01,
+        "TotalLoadWeight": 4205.748028,
+        "TotalLoadValue": 56220.8,
+        "AdvanceMoneyValue": 0,
+        "BranchCode": "1",
+        "LoadBrazilianNCM": null,
+        "LoadBrazilianANTTCodeType": 5,
+        "ShippingReceiver": {
+            "Country": 55,
+            "NationalId": "83011460000142",
+            "Name": "SUL BRASIL IND E COM PLAST. E METALICOS S.A",
+            "ReceiverType": "Company"
+        },
+        "BrazilianIBGECodeSource": 2914802,
+        "BrazilianIBGECodeDestination": 2911204,
+        "TravelledDistance": 576,
+        "VPR": {
+            "Issue": false,
+            "VPROneWay": "false",
+            "VPRSuspendedAxleNumber": 0,
+            "VPRReturnSuspendedAxleNumber": 0,
+            "MandatoryVPRType": 0,
+            "SubhiredNationalId": null
+        },
+        "ShippingPayment": {
+            "ExpectedDeliveryDate": "2026-03-16T09:10:16Z",
+            "ExpectedDeliveryLocationType": "Branch"
+        },
+        "Drivers": [
+            {
+                "Country": "Brazil",
+                "NationalId": "05078455523",
+                "Main": true
+            }
+        ],
+        "Documents": [
+            {
+                "BranchCode": "1",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152241,
+                "EletronicKey": "29260302028263000304550010001522411861131018",
+                "CheckDocument": null
+            }
+        ],
+        "Vehicles": [
+            {
+                "Country": "Brazil",
+                "LicensePlate": "ICG5748"
+            }
+        ],
+        "AccountingAdjustments": null,
+        "Taxes": [
+            {
+                "Type": "1",
+                "Value": 0
+            },
+            {
+                "Type": "34",
+                "Value": 0
+            },
+            {
+                "Type": "2",
+                "Value": 0
+            },
+            {
+                "Type": "3",
+                "Value": 0
+            }
+        ],
+        "Outsourcing": null,
+        "BillingBreak": null,
+        "ToleranceBreak": null,
+        "FreightBreak": null
+    }
+]

@@ -1,0 +1,41 @@
+{
+    "Email": "joseoliveira@gmail.com",
+    "Phones": [
+        {
+            "AreaCode": "11",
+            "Number": "23456789",
+            "Preferential": true,
+            "TypeId": "Fixed"
+        }
+    ],
+    "BrazilianSettings": {
+        "RNTRC": "001560715",
+        "HiredPessoaFisica": {
+            "INSS": "123450987",
+            "RG": "098764512"
+        },
+        "HiredPessoaJuridica": {
+            "InscricaoEstadual": "763776410589",
+            "InscricaoMunicipal": "123456",
+            "NomeFantasia": "Oliveiras Moto",
+            "OptanteSimplesNacional": true
+        }
+    },
+    "Address": {
+        "Street": "Avenida Paulista",
+        "Number": "578",
+        "Complement": "casa 1",
+        "Neighborhood": "Bela Vista",
+        "ZipCode": "01311000"
+    },
+    "CompanyInformation": {
+        "CompanyName": "Oliveiras Moto"
+    },
+    "HiredPersonalInformation": {
+        "Name": "Jose Oliveira",
+        "BirthDate": "2000-08-04T15:09:51.577Z",
+        "LegalDependents": 5,
+        "Gender": "Male"
+    },
+    "FuelVoucherPercentage": "0"
+}

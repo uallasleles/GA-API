@@ -1,0 +1,8 @@
+{
+    "CodigoCliente": "4510",
+    "NomeMovimento": "Seguro",
+    "TipoMovimento": "D",
+    "IncideSobreImposto": true,
+    "IncideSobreFrete": true,
+    "LiberaSaldo": true
+}

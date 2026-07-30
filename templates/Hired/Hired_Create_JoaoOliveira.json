@@ -1,0 +1,43 @@
+{
+	"Country": "Brazil",
+	"HiredType": "Person",
+	"NationalId": "26965267020",
+	"Email": "josemaciel@gmail.com",
+	"Phones": [
+		{
+			"AreaCode": "11",
+			"Number": "989091786",
+			"Preferential": true,
+			"TypeId": "Cell"
+		}
+	],
+	"BrazilianSettings": {
+		"RNTRC": "000259926",
+		"HiredPessoaFisica": {
+			"INSS": "64528427758",
+			"RG": "302879081"
+		},
+		"HiredPessoaJuridica": {
+			"InscricaoEstadual": "104642425485",
+			"InscricaoMunicipal": "279051452110",
+			"NomeFantasia": "Jose Oliveira Maciel LTDA",
+			"OptanteSimplesNacional": true
+		}
+	},
+	"Address": {
+		"Street": "Avenida Paulista",
+		"Number": "123",
+		"Complement": "Apto 11",
+		"Neighborhood": "Bela Vista",
+		"ZipCode": "01311100"
+	},
+	"CompanyInformation": {
+		"CompanyName": "Jose Oliveira Maciel LTDA"
+	},
+	"HiredPersonalInformation": {
+		"Name": "Jose Oliveira Maciel",
+		"BirthDate": "2000-08-23T17:00:03.561Z",
+		"LegalDependents": 0,
+		"Gender": "Male"
+	}
+}

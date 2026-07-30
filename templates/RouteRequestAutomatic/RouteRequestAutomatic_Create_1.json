@@ -1,0 +1,24 @@
+{
+    "OriginPostalCode": "",
+    "OriginIBGECode": "5106802",
+    "OriginLongitude": "",
+    "OriginLatitude": "",
+
+    "DestinyPostalCode": "",
+    "DestinyIBGECode": "5107909",
+    "DestinyLongitude": "",
+    "DestinyLatitude": "",
+
+    "RouteStop": [
+        {
+            "PostalCode": "",
+            "IBGECode": "5107883",
+            "Latitude": "",
+            "Longitude": ""
+        }
+    ],
+
+    "BranchCode": "1",
+    "RoundTrip": true,
+    "TraceIdentifier": "101A"
+}

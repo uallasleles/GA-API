@@ -1,0 +1,40 @@
+{
+    "Email": "neasouza94@hotmail.com",
+    "Phones": [
+        {
+            "AreaCode": "73",
+            "Number": "981261379",
+            "Preferential": "true",
+            "TypeId": "CELL"
+        }
+    ],
+    "BrazilianSettings": {
+        "RNTRC": "052073044",
+        "HiredPessoaFisica": {
+            "INSS": null,
+            "RG": null
+        },
+        "HiredPessoaJuridica": {
+            "InscricaoEstadual": "192442606",
+            "InscricaoMunicipal": null,
+            "NomeFantasia": "A.C.S. LISBOA TRANSPORTE",
+            "OptanteSimplesNacional": "false"
+        }
+    },
+    "Address": {
+        "Street": "JERICO, 68",
+        "Number": "68",
+        "Complement": "JERICO",
+        "Neighborhood": "VILA ANALIA",
+        "ZipCode": "45608230"
+    },
+    "CompanyInformation": {
+        "CompanyName": "A.C.S. LISBOA TRANSPORTE"
+    },
+    "HiredPersonalInformation": {
+        "Name": "Uninformed",
+        "BirthDate": "1900-01-01T00:00:00Z",
+        "LegalDependents": "0",
+        "Gender": "Uninformed"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "Response": {
+        "StatusCode": 200
+    },
+    "Result": [
+        {
+            "TraceCode": 1,
+            "RouteCode": 142969,
+            "Distance": 576.0,
+            "RoundTrip": true,
+            "Name": "BR-418 / BR-101 / BA-69 IDA E VOLTA",
+            "TotalVPRValue": 0.0,
+            "TraceIdentifier": "19895"
+        }
+    ]
+}

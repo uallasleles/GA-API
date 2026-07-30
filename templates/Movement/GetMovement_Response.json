@@ -1,0 +1,55 @@
+{
+    "Response": {
+        "StatusCode": 200
+    },
+    "Result": [
+        {
+            "Identifier": "Seguro2",
+            "Description": "Seguro2",
+            "AdjustmentType": "Debit",
+            "FocusOnTaxes": false,
+            "FocusOnFreight": false,
+            "ReleaseBalance": false
+        },
+        {
+            "Identifier": "Seguro",
+            "Description": "Seguro",
+            "AdjustmentType": "Debit",
+            "FocusOnTaxes": false,
+            "FocusOnFreight": false,
+            "ReleaseBalance": false
+        },
+        {
+            "Identifier": "OutrosDescontos2",
+            "Description": "OutrosDescontos2",
+            "AdjustmentType": "Debit",
+            "FocusOnTaxes": false,
+            "FocusOnFreight": false,
+            "ReleaseBalance": false
+        },
+        {
+            "Identifier": "OutrosDescontos",
+            "Description": "OutrosDescontos",
+            "AdjustmentType": "Debit",
+            "FocusOnTaxes": false,
+            "FocusOnFreight": false,
+            "ReleaseBalance": false
+        },
+        {
+            "Identifier": "2",
+            "Description": "Credito",
+            "AdjustmentType": "Credit",
+            "FocusOnTaxes": false,
+            "FocusOnFreight": false,
+            "ReleaseBalance": false
+        },
+        {
+            "Identifier": "1",
+            "Description": "Debito",
+            "AdjustmentType": "Debit",
+            "FocusOnTaxes": false,
+            "FocusOnFreight": false,
+            "ReleaseBalance": false
+        }
+    ]
+}

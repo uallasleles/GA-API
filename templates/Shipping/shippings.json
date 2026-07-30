@@ -1,0 +1,120 @@
+[
+  {
+    "Identifier": "string",
+    "Country": "string",
+    "HiredCountry": "string",
+    "HiredNationalId": "string",
+    "OperationIdentifier": "string",
+    "CardNumber": 0,
+    "VPRCardNumber": 0,
+    "BrazilianRouteTraceCode": 0,
+    "BrazilianRouteRouteCode": 0,
+    "IssueDate": "2026-01-27T11:56:42.399Z",
+    "TotalFreightValue": 0,
+    "TotalLoadWeight": 0,
+    "TotalLoadValue": 0,
+    "AdvanceMoneyValue": 0,
+    "BranchCode": "string",
+    "LoadBrazilianNCM": "string",
+    "LoadBrazilianANTTCodeType": 0,
+    "BrazilianIBGECodeSource": "string",
+    "BrazilianIBGECodeDestination": "string",
+    "BrazilianCEPSource": "string",
+    "BrazilianCEPDestination": "string",
+    "TravelledDistance": 0,
+    "VPR": {
+      "Issue": true,
+      "VPROneWay": true,
+      "VPRSuspendedAxleNumber": 0,
+      "VPRReturnSuspendedAxleNumber": 0,
+      "MandatoryVPRType": 0,
+      "SubhiredNationalId": "string"
+    },
+    "ShippingPayment": {
+      "ExpectedDeliveryDate": "2026-01-27T11:56:42.399Z",
+      "ExpectedDeliveryLocationType": "Branch"
+    },
+    "Drivers": [
+      {
+        "Country": "string",
+        "NationalId": "string",
+        "Main": true
+      }
+    ],
+    "Documents": [
+      {
+        "BranchCode": "string",
+        "DocumentType": "CTE",
+        "Series": "string",
+        "Number": "string",
+        "EletronicKey": "string",
+        "CheckDocument": true,
+        "DocumentCheckLists": [
+          {
+            "Id": 0,
+            "PaymentBlock": true
+          }
+        ],
+        "DeliveryLocationType": "Branch"
+      }
+    ],
+    "Vehicles": [
+      {
+        "Country": "string",
+        "LicensePlate": "string"
+      }
+    ],
+    "AccountingAdjustments": [
+      {
+        "Identifier": "string",
+        "Value": 0
+      }
+    ],
+    "ShippingReceiver": {
+      "Country": "string",
+      "NationalId": "string",
+      "Name": "string",
+      "ReceiverType": "Person"
+    },
+    "Taxes": [
+      {
+        "Type": "IRRF",
+        "Value": 0
+      }
+    ],
+    "ShippingFuel": {
+      "FuelCardNumber": "string",
+      "FuelValue": 0
+    },
+    "ShippingInternationalRoute": {
+      "OriginCountry": "string",
+      "OriginCityCode": "string",
+      "OriginPostalCode": "string",
+      "DestinationCountry": "string",
+      "DestinationCityCode": "string",
+      "DestinationPostalCode": "string",
+      "RouteCode": 0,
+      "TraceCode": 0,
+      "CommodityCode": "string"
+    },
+    "ProcessingShippingType": "OnlyFreight",
+    "Outsourcing": true,
+    "BillingBreak": "NotCharge",
+    "ToleranceBreak": 0,
+    "FreightBreak": true,
+    "CIOTShippingType": 0,
+    "ExistingContractId": 0,
+    "TransportationCustomer": "string",
+    "DigitalDocument": true,
+    "PhysicalDocument": true,
+    "GeneralObservation": "string",
+    "SubcontractorID": "string",
+    "SubcontractorAdvancePercentage": 0,
+    "SubcontractorFinalBalancePercentage": 0,
+    "MinimumFreightCost": {
+      "DistanceTravel": 0,
+      "EmptyReturn": true,
+      "HighPerformanceTransport": true
+    }
+  }
+]

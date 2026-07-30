@@ -1,0 +1,288 @@
+[
+    {
+        "Identifier": 39776,
+        "Country": "55",
+        "HiredCountry": "55",
+        "HiredNationalId": "62003375000162",
+        "OperationIdentifier": 1,
+        "CardNumber": "700021821",
+        "VPRCardNumber": 0,
+        "BrazilianRouteTraceCode": "2",
+        "BrazilianRouteRouteCode": "51148",
+        "IssueDate": "2026-03-16T09:10:16Z",
+        "TotalFreightValue": 0.01,
+        "TotalLoadWeight": 4205.748028,
+        "TotalLoadValue": 56220.8,
+        "AdvanceMoneyValue": 0,
+        "VPR": {
+            "Issue": false,
+            "VPROneWay": "false",
+            "VPRSuspendedAxleNumber": 0,
+            "VPRReturnSuspendedAxleNumber": 0,
+            "SubhiredNationalId": null,
+            "MandatoryVPRType": 0
+        },
+        "BranchCode": "1",
+        "LoadBrazilianNCM": null,
+        "LoadBrazilianANTTCodeType": 5,
+        "BrazilianIBGECodeSource": 2914802,
+        "BrazilianIBGECodeDestination": 2911204,
+        "TravelledDistance": 576,
+        "ShippingPayment": {
+            "ExpectedDeliveryDate": "2026-03-16T09:10:16Z",
+            "ExpectedDeliveryLocationType": "Branch"
+        },
+        "Drivers": [
+            {
+                "Country": "Brazil",
+                "NationalId": "05078455523",
+                "Main": true
+            }
+        ],
+        "Documents": [
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152241,
+                "EletronicKey": "29260302028263000304550010001522411861131018",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152280,
+                "EletronicKey": "29260302028263000304550010001522801132130217",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152279,
+                "EletronicKey": "29260302028263000304550010001522791716822932",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152278,
+                "EletronicKey": "29260302028263000304550010001522781152301833",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152277,
+                "EletronicKey": "29260302028263000304550010001522771175512043",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152276,
+                "EletronicKey": "29260302028263000304550010001522761221124236",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152275,
+                "EletronicKey": "29260302028263000304550010001522751802169711",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152274,
+                "EletronicKey": "29260302028263000304550010001522741167624219",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152273,
+                "EletronicKey": "29260302028263000304550010001522731178118258",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152272,
+                "EletronicKey": "29260302028263000304550010001522721559621810",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152270,
+                "EletronicKey": "29260302028263000304550010001522701881201706",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152266,
+                "EletronicKey": "29260302028263000304550010001522661141911820",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152264,
+                "EletronicKey": "29260302028263000304550010001522641207140229",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152263,
+                "EletronicKey": "29260302028263000304550010001522631148244542",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152261,
+                "EletronicKey": "29260302028263000304550010001522611196138167",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152260,
+                "EletronicKey": "29260302028263000304550010001522601138119204",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152256,
+                "EletronicKey": "29260302028263000304550010001522561102209138",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152255,
+                "EletronicKey": "29260302028263000304550010001522551173249615",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152253,
+                "EletronicKey": "29260302028263000304550010001522531127511723",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152250,
+                "EletronicKey": "29260302028263000304550010001522501224232181",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152249,
+                "EletronicKey": "29260302028263000304550010001522491113229246",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152246,
+                "EletronicKey": "29260302028263000304550010001522461210252883",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152244,
+                "EletronicKey": "29260302028263000304550010001522441661171611",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "13",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 27047,
+                "EletronicKey": "29260308051725000382550010000270471235130927",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152243,
+                "EletronicKey": "29260302028263000304550010001522431802374117",
+                "CheckDocument": null
+            },
+            {
+                "BranchCode": "12",
+                "DocumentType": "NFe",
+                "Series": "1",
+                "Number": 152242,
+                "EletronicKey": "29260302028263000304550010001522421161581220",
+                "CheckDocument": null
+            }
+        ],
+        "Vehicles": [
+            {
+                "Country": "Brazil",
+                "LicensePlate": "ICG5748"
+            }
+        ],
+        "AccountingAdjustments": null,
+        "ShippingReceiver": {
+            "Country": "Brazil",
+            "NationalId": "07191774000196",
+            "Name": "CLESIO MARQUES BAHIA ME",
+            "ReceiverType": "Company"
+        },
+        "Taxes": [
+            {
+                "Type": "1",
+                "Value": 0
+            },
+            {
+                "Type": "34",
+                "Value": 0
+            },
+            {
+                "Type": "2",
+                "Value": 0
+            },
+            {
+                "Type": "3",
+                "Value": 0
+            }
+        ],
+        "Outsourcing": null,
+        "BillingBreak": null,
+        "ToleranceBreak": null,
+        "FreightBreak": null
+    }
+]

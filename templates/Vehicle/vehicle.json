@@ -1,0 +1,22 @@
+{
+    "Country": "Brazil",
+    "LicensePlate": "string",
+    "VehicleClassification": "Implement",
+    "VehicleCategory": "Passenger",
+    "VehicleAxles": "Axle01",
+    "Type": "CityDelivery",
+    "VehicleOwner": {
+        "Country": "Brazil",
+        "NationalId": "string",
+        "BrazilianSettings": {
+            "RNTRC": "string",
+            "VehiclePessoaJuridica": {
+                "NomeFantasia": "string"
+            }
+        },
+        "Type": "Person",
+        "VehiclePersonalInformation": {
+            "Name": "string"
+        }
+    }
+}

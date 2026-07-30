@@ -1,0 +1,114 @@
+Manifest-Version: 1.0
+Created-By: 11.0.31 (Oracle Corporation)
+
+Name: instantclient_19_31/libnnz19.so
+SHA-256-Digest: Pbn+/jP2GgtYY8suvCqh8ESD3Zu720QtPB7t7I/CUlY=
+
+Name: instantclient_19_31/adrci
+SHA-256-Digest: qbP8ZpVN84xQVAy3+2iZVC4/60qfEL9Cf384TtDkTVE=
+
+Name: instantclient_19_31/ojdbc8.jar
+SHA-256-Digest: WAk0+daAAAXnhM7r8v+Lnqfu8t2VWbWZgH/EWPZq1/Y=
+
+Name: instantclient_19_31/libcryptocme.so
+SHA-256-Digest: o+OY7ucuaUNpPibgBg0rsZV/R1hWm8I8kI19V60R2xs=
+
+Name: instantclient_19_31/BASIC_LICENSE
+SHA-256-Digest: P5PQQaT4aoIGl6b8op6FmzevqaejGJf3k7vZInYFncE=
+
+Name: instantclient_19_31/libocci_gcc53.so.19.1
+SHA-256-Digest: MoG5t5W6LsY0wc7Aq84nU/qGGJqQjKpwe2owv7Do+Mo=
+
+Name: instantclient_19_31/libccme_ecc.so
+SHA-256-Digest: rFCMRPQIjO3EG4qXeLcM5bnKdo6SzgfLHHDpLOc0/8c=
+
+Name: instantclient_19_31/libclntshcore.so.19.1
+SHA-256-Digest: wkj9fxT9dFnu6QDGWND+wQvthhmQ/xe8Drn30tZBLUY=
+
+Name: instantclient_19_31/ucp.jar
+SHA-256-Digest: aptOBmPS3IlAMooqWHi91nAkmS5sGHR9x6AJ+RBAYTs=
+
+Name: instantclient_19_31/libocijdbc19.so
+SHA-256-Digest: TdlGn39jz0GQk3HJOeFw6yMoQ92xgwEsyYDqi1aN3/c=
+
+Name: instantclient_19_31/libclntsh.so
+SHA-256-Digest: Ij9DLR1geaeJUBXxGfNQKvuM4/RwrsI6W2uh0HkLMJs=
+
+Name: instantclient_19_31/libtfojdbc1.so
+SHA-256-Digest: 7WY/wbSYieQTJ+B9nfdq0lOOsf0GNqdCsbQ5PAHMt48=
+
+Name: instantclient_19_31/libocci.so.18.1
+SHA-256-Digest: bXTOg+pA8WuaiMK5++vKRJzyfc6vx5kxKpFBiSx2w5o=
+
+Name: instantclient_19_31/libocci.so.19.1
+SHA-256-Digest: jIJEoIbSHhVG6SA4skPCQycTZEO2miZ+jB9P8xVLr5Q=
+
+Name: instantclient_19_31/libclntsh.so.10.1
+SHA-256-Digest: Ij9DLR1geaeJUBXxGfNQKvuM4/RwrsI6W2uh0HkLMJs=
+
+Name: instantclient_19_31/libocci_gcc53.so
+SHA-256-Digest: OQMKMvGfJPH/NQggO78kYLIgf5Qp0fkBa8JnCYXaiyI=
+
+Name: instantclient_19_31/libclntsh.so.11.1
+SHA-256-Digest: Ij9DLR1geaeJUBXxGfNQKvuM4/RwrsI6W2uh0HkLMJs=
+
+Name: instantclient_19_31/libccme_base_non_fips.so
+SHA-256-Digest: ekL7sNKnstd7qJhRQHHpaPjG6dEQDyYXF5sjjWQlTbI=
+
+Name: instantclient_19_31/libccme_ecc_non_fips.so
+SHA-256-Digest: uKoaAbtUrfW+cIszpfuoJNLIFqwxZfytVupp+PvcZM8=
+
+Name: instantclient_19_31/libocci.so.12.1
+SHA-256-Digest: bXTOg+pA8WuaiMK5++vKRJzyfc6vx5kxKpFBiSx2w5o=
+
+Name: instantclient_19_31/libociei.so
+SHA-256-Digest: cDlXbPnpuqy/EalD3pq0TeIB3YDXjpx6EPvbSd3hysQ=
+
+Name: instantclient_19_31/libccme_asym.so
+SHA-256-Digest: hp4zghDlvwRqxBNavGqJcoPbkSOHT2nHiygBiL99334=
+
+Name: instantclient_19_31/libclntsh.so.12.1
+SHA-256-Digest: Ij9DLR1geaeJUBXxGfNQKvuM4/RwrsI6W2uh0HkLMJs=
+
+Name: instantclient_19_31/libmql1.so
+SHA-256-Digest: 7SBl6G37xmca6mi35NE4TQtWu6+mkgwjgSORS8c69Z4=
+
+Name: instantclient_19_31/libocci.so.10.1
+SHA-256-Digest: bXTOg+pA8WuaiMK5++vKRJzyfc6vx5kxKpFBiSx2w5o=
+
+Name: instantclient_19_31/network/admin/README
+SHA-256-Digest: 6/rc95VQpXtaiUJ7dgUQASUmSVQD+6H8rJa5ISLhD+o=
+
+Name: instantclient_19_31/libocci.so.11.1
+SHA-256-Digest: bXTOg+pA8WuaiMK5++vKRJzyfc6vx5kxKpFBiSx2w5o=
+
+Name: instantclient_19_31/libclntsh.so.18.1
+SHA-256-Digest: Ij9DLR1geaeJUBXxGfNQKvuM4/RwrsI6W2uh0HkLMJs=
+
+Name: instantclient_19_31/libclntsh.so.19.1
+SHA-256-Digest: 8AqaskQpj7lvYQWhdoEHxm9y8WEHVzM0Y1mJb6JoE6k=
+
+Name: instantclient_19_31/libocci.so
+SHA-256-Digest: bXTOg+pA8WuaiMK5++vKRJzyfc6vx5kxKpFBiSx2w5o=
+
+Name: instantclient_19_31/libccme_base.so
+SHA-256-Digest: KsVr58NsLqXNrUR/cz+mxy4bQ36ZYzGOlDbTuQblJc0=
+
+Name: instantclient_19_31/uidrvci
+SHA-256-Digest: DtVd39qKdByEKOcaKSy3ySegdIr9NVo9o/xwO3ExPrU=
+
+Name: instantclient_19_31/liboramysql19.so
+SHA-256-Digest: Nkk75/dX7PeOL2O6lUac6PjZ8pneaQd2Bwt+0axJNdk=
+
+Name: instantclient_19_31/genezi
+SHA-256-Digest: OUEjDz3kndCAmmsrfqE0h+4n3JZWvEWsYUSzC/lX2Kg=
+
+Name: instantclient_19_31/xstreams.jar
+SHA-256-Digest: 65U9xGqbQvml7BVOpECmKnwPeUu+/9U4Ap9whUzrV8E=
+
+Name: instantclient_19_31/BASIC_README
+SHA-256-Digest: vnKzERRyy+2wiar7fqPTZNjZ8VUYK6PsDLS2wmPOwGg=
+
+Name: instantclient_19_31/libipc1.so
+SHA-256-Digest: BxHcuYuAk/IuLvA5bxdtWQj3i4YvJYrE6BImTZqM+0I=
+

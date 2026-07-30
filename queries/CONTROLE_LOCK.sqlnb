@@ -1,0 +1,58 @@
+cells:
+  - kind: 2
+    value: "SELECT  \r
+
+      \t  CODUSUR\t--\tCódigo do usuário\r
+
+      \t, DATAHORA\t--\tData e hora de inserção do registro\r
+
+      \t, NOMEUSUR\t--\tNome de usuário\r
+
+      \t, NUMCAR\t--\tNúmero do carregamento da 410\r
+
+      \t, ROTINA\t--\tRotina que inseriu o registro na tabela\r
+
+      FROM CHOCOSUL.PCCONTROLELOCK;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- MONIQUE OLIVEIRA\r
+
+      DELETE FROM \r
+
+      \tCHOCOSUL.PCCONTROLELOCK \r
+
+      WHERE 1=1 \r
+
+      \tAND CODUSUR = :CODUSUR \r
+
+      \tAND NUMCAR = :NUMCAR;\r
+
+      COMMIT;\r
+
+      \r
+
+      -- :CODUSUR 1639\r
+
+      -- :NUMCAR \t174773"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- YASMIN COSTA \r
+
+      DELETE FROM \r
+
+      \tCHOCOSUL.PCCONTROLELOCK \r
+
+      WHERE 1=1 \r
+
+      \tAND CODUSUR = :CODUSUR \r
+
+      \tAND NUMCAR = :NUMCAR;\r
+
+      COMMIT;\r
+
+      \r
+
+      -- :CODUSUR = 1399 \r
+
+      -- :NUMCAR = 167833  "
+    languageId: oracle-sql

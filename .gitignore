@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Ambiente virtual (gerenciado por uv)
+.venv/
+
+# Segredos e configuração local
+.env
+config.json
+
+# Dados/estado de runtime (não versionar)
+data/*.log
+data/*.db
+
+# Instant Client da Oracle (binários proprietários, não usados pela API principal)
+lib/instantclient/
+lib/instantclient-basic-linux.x64-*.zip
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

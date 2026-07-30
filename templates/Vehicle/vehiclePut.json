@@ -1,0 +1,20 @@
+{
+    "Type": "CityDelivery",
+    "VehicleCategory": "Passenger",
+    "VehicleAxles": "Axle01",
+    "VehicleClassification": "Implement",
+    "VehicleOwner": {
+        "Country": "Brazil",
+        "NationalId": "string",
+        "BrazilianSettings": {
+            "RNTRC": "string",
+            "VehiclePessoaJuridica": {
+                "NomeFantasia": "string"
+            }
+        },
+        "Type": "Person",
+        "VehiclePersonalInformation": {
+            "Name": "string"
+        }
+    }
+}

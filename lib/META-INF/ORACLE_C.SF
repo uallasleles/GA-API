@@ -1,0 +1,117 @@
+Signature-Version: 1.0
+Created-By: 11.0.31 (Oracle Corporation)
+SHA-256-Digest-Manifest: NHM3yjHx30uOjgjWdjClP6kU5noiIJLnKEiA4vFTDZo=
+SHA-256-Digest-Manifest-Main-Attributes: 7ak8luR/Ue5vnQ6n0iStGCDRfMBtGTj
+ hSDp3fLnDToo=
+
+Name: instantclient_19_31/libnnz19.so
+SHA-256-Digest: hhlgaoRyNfsHId4AJG+POmoQGpLPRFl8jDcMDKSBTjg=
+
+Name: instantclient_19_31/adrci
+SHA-256-Digest: iUQDddXWVYkX3n0yZqBZf33k8GNSr4LDCqgK+LM0B50=
+
+Name: instantclient_19_31/ojdbc8.jar
+SHA-256-Digest: he5bkFLxMDJvIS0Q/6X8Y5CmtBJKnh7xCoI0gAqhriU=
+
+Name: instantclient_19_31/libcryptocme.so
+SHA-256-Digest: TtXeJ2skSQPjsnrXCRDfRxmlVQR4Xwmeb/2nzMaCpq0=
+
+Name: instantclient_19_31/BASIC_LICENSE
+SHA-256-Digest: o4xQWhHA4/J4MYw9VkFv7r966NL7aR9K1w0MeEPBM8k=
+
+Name: instantclient_19_31/libocci_gcc53.so.19.1
+SHA-256-Digest: M59G/bVEWvRq5D4lNaTh/SWcZH8yRmFdUxBb4JOEqKg=
+
+Name: instantclient_19_31/libccme_ecc.so
+SHA-256-Digest: jkSaZ95zQOtkO1PYUxhk+kvA2VM5umt3eehIdrgQtqA=
+
+Name: instantclient_19_31/libclntshcore.so.19.1
+SHA-256-Digest: KQvgJd13yg0yeOIhJju5+yCn0nU7Q2nM5xSbodUPb+Q=
+
+Name: instantclient_19_31/ucp.jar
+SHA-256-Digest: RmRTnwGf2qzAciyCgMIhAclXG05XkwOnDrjOdYmtAII=
+
+Name: instantclient_19_31/libocijdbc19.so
+SHA-256-Digest: EnoXkMRIwFKgAVKbqFVwqRrzH1bNZId/D7f1lukf5/Y=
+
+Name: instantclient_19_31/libclntsh.so
+SHA-256-Digest: zuy28UUZm/QywlEPpTfTGYaMAz0BaX9AlDxrHikVUYo=
+
+Name: instantclient_19_31/libtfojdbc1.so
+SHA-256-Digest: yBkgR+phLAMgE9eSU1URrCvuHAMFDoG6ULWvWHc7S10=
+
+Name: instantclient_19_31/libocci.so.18.1
+SHA-256-Digest: F/pgnbM+vWgNFQtAkNm3TN3TnzTTNm2xgB/OQCxoatc=
+
+Name: instantclient_19_31/libocci.so.19.1
+SHA-256-Digest: kQjtymKll7Mo93I8ZDm4C6mC/koNEBJ3+DxuF6tZSkk=
+
+Name: instantclient_19_31/libclntsh.so.10.1
+SHA-256-Digest: k2vwFZcQzltQSRfOke/eDf7L0vjUvWqx38N/TrWDgR4=
+
+Name: instantclient_19_31/libocci_gcc53.so
+SHA-256-Digest: 57vwgmvy95jJjyTeDbv3S7qHRmY85IsWlYtQyPQguQk=
+
+Name: instantclient_19_31/libclntsh.so.11.1
+SHA-256-Digest: BliwKrKmwfnkah3PSO0JMYgoX5vO5lDJbmlUxJmwhKA=
+
+Name: instantclient_19_31/libccme_base_non_fips.so
+SHA-256-Digest: AlkFgwGzUTR7RwTgPbozWL0FHUl527n4eyUbQZ50HqM=
+
+Name: instantclient_19_31/libccme_ecc_non_fips.so
+SHA-256-Digest: QMpYlwGL0hGafzjpR/yRt75uVlP3KhEozq7R6vkCigU=
+
+Name: instantclient_19_31/libocci.so.12.1
+SHA-256-Digest: J5AwjZcwF2kOQQW1sC5uKThlVfBsmxpyvlmhat8linM=
+
+Name: instantclient_19_31/libociei.so
+SHA-256-Digest: +elLL5STiuIPWpQTQ146YZRhrD9zgcdavIYhAZqGLWw=
+
+Name: instantclient_19_31/libccme_asym.so
+SHA-256-Digest: jicHx2XyRkoH/KPi9bV1+QwL4uTAtE5GXvYz0j2Phpk=
+
+Name: instantclient_19_31/libclntsh.so.12.1
+SHA-256-Digest: DP8RUy2DNZ2+lm9oaAnijPF25usR/r2JWZ5WjZnbkcQ=
+
+Name: instantclient_19_31/libmql1.so
+SHA-256-Digest: eHrWcY/rFXOEwR/TjsY289DvPRJUHp+puirJhMA1rGg=
+
+Name: instantclient_19_31/libocci.so.10.1
+SHA-256-Digest: Bj7kFtgWUHYBo1V4nFPOlMzpYpxfNLZJRcbvPIf+KdE=
+
+Name: instantclient_19_31/network/admin/README
+SHA-256-Digest: D7kMBEJZqNCTkzw8hotWkVrKvCpY20BtAxD8hIgQ90U=
+
+Name: instantclient_19_31/libocci.so.11.1
+SHA-256-Digest: kOrOHhkNSAfuBQTLBA7mkDHQaK6UrHvcn8B5DaN+jzo=
+
+Name: instantclient_19_31/libclntsh.so.18.1
+SHA-256-Digest: tiam1TYyCCYJMf73uwgc4EuAVbhW0KTU145TwDGGWyU=
+
+Name: instantclient_19_31/libclntsh.so.19.1
+SHA-256-Digest: OZJscmLMcIoWgPss+0tKVSZZwgI/dIDqA4nsjACsLdI=
+
+Name: instantclient_19_31/libocci.so
+SHA-256-Digest: IiPafDaefOsPOB0ZzxvmwqOlzyaDZzCoAsmiKycHIQg=
+
+Name: instantclient_19_31/libccme_base.so
+SHA-256-Digest: toQBQGZsOVCA9EinoVwVu5QpIfbKTu2MbnJQcbB+g88=
+
+Name: instantclient_19_31/uidrvci
+SHA-256-Digest: sdWW1cAzjNUK4S/iBt67UoBDyIrkLcxtlaSBiwNSCvI=
+
+Name: instantclient_19_31/liboramysql19.so
+SHA-256-Digest: 8ucAmtYhnQUsRcboeLv+jjgt2Jr8UwjwRRfxX9dOFW8=
+
+Name: instantclient_19_31/genezi
+SHA-256-Digest: 5NDt3XMdwfWBsq6eCHGAmJTsPI9LcO3BJ8KNWusxXyY=
+
+Name: instantclient_19_31/xstreams.jar
+SHA-256-Digest: 14OVNzuDfScP9aPcZDShn9fk7b1/4pRIeYMSj+ZVgw0=
+
+Name: instantclient_19_31/BASIC_README
+SHA-256-Digest: 2Onlck2aZyeA7JUWypGTA/UznlocDHFribKWwszHErU=
+
+Name: instantclient_19_31/libipc1.so
+SHA-256-Digest: oH0tZHCddOlzQzBkuD0cdd351dA4jGPeImo2eensqkI=
+

@@ -1,0 +1,41 @@
+{
+    "Email": "string",
+    "Phones": [
+        {
+            "AreaCode": "string",
+            "Number": "string",
+            "Preferential": true,
+            "TypeId": "Fixed"
+        }
+    ],
+    "BrazilianSettings": {
+        "RNTRC": "string",
+        "HiredPessoaFisica": {
+            "INSS": "string",
+            "RG": "string"
+        },
+        "HiredPessoaJuridica": {
+            "InscricaoEstadual": "string",
+            "InscricaoMunicipal": "string",
+            "NomeFantasia": "string",
+            "OptanteSimplesNacional": true
+        }
+    },
+    "Address": {
+        "Street": "string",
+        "Number": "string",
+        "Complement": "string",
+        "Neighborhood": "string",
+        "ZipCode": "string"
+    },
+    "CompanyInformation": {
+        "CompanyName": "string"
+    },
+    "HiredPersonalInformation": {
+        "Name": "string",
+        "BirthDate": "2025-11-16T22:01:44.876Z",
+        "LegalDependents": 0,
+        "Gender": "Uninformed"
+    },
+    "FuelVoucherPercentage": "string"
+}

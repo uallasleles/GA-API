@@ -1,0 +1,149 @@
+{
+  "Response": {
+    "StatusCode": 200
+  },
+  "Result": {
+    "ShippingId": 2065609,
+    "CIOT": "014000465405XXXX",
+    "CIOTInContingency": 1,
+    "Status": "InTransit",
+    "Identifier": "39739",
+    "HiredNationalId": "26965267020",
+    "OperationIdentifier": "1",
+    "CardNumber": 700021825,
+    "BrazilianRouteTraceCode": 1,
+    "BrazilianRouteRouteCode": 142999,
+    "ShippingPayment": {
+      "ExpectedDeliveryDate": "2026-03-13T08:36:31",
+      "ExpectedDeliveryLocationType": "Branch",
+      "DeliveryLocationName": "",
+      "DeliveryLocationUser": "",
+      "DeliveryLocationType": "",
+      "DeliveryDate": "0001-01-01T00:00:00"
+    },
+    "IssueDate": "2026-03-13T16:56:37.843",
+    "TotalFreightValue": 1000,
+    "TotalLoadWeight": 68.67,
+    "TotalLoadValue": 1287.93,
+    "AdvanceMoneyValue": 0,
+    "ConsumedValue": 0,
+    "Drivers": [
+      {
+        "Country": "Brazil",
+        "NationalId": "04170803523",
+        "Main": true
+      }
+    ],
+    "Documents": [
+      {
+        "BranchCode": "2",
+        "DocumentType": "NFe",
+        "Series": "1",
+        "Number": "787573",
+        "EletronicKey": "29260308051725000110550010007875731938259217",
+        "CheckDocument": null,
+        "DocumentCheckLists": [],
+        "DeliveryLocationType": null
+      },
+      {
+        "BranchCode": "2",
+        "DocumentType": "NFe",
+        "Series": "1",
+        "Number": "787574",
+        "EletronicKey": "29260308051725000110550010007875741118223171",
+        "CheckDocument": null,
+        "DocumentCheckLists": [],
+        "DeliveryLocationType": null
+      }
+    ],
+    "Vehicles": [
+      {
+        "Country": "Brazil",
+        "LicensePlate": "ICG5748"
+      }
+    ],
+    "AccountingAdjustments": [
+      {
+        "Date": "2026-03-13T16:56:39.657",
+        "Identifier": "99",
+        "MovementType": 1,
+        "Description": "Saldo de Emissao de Viagem",
+        "AdjustmentType": "Credit",
+        "Value": 1000
+      },
+      {
+        "Date": "2026-03-13T16:56:39.72",
+        "Identifier": "1",
+        "MovementType": 1,
+        "Description": "IRRF",
+        "AdjustmentType": "Debit",
+        "Value": 0
+      },
+      {
+        "Date": "2026-03-13T16:56:39.75",
+        "Identifier": "34",
+        "MovementType": 1,
+        "Description": "INSS",
+        "AdjustmentType": "Debit",
+        "Value": 0
+      },
+      {
+        "Date": "2026-03-13T16:56:39.767",
+        "Identifier": "2",
+        "MovementType": 1,
+        "Description": "SEST",
+        "AdjustmentType": "Debit",
+        "Value": 0
+      },
+      {
+        "Date": "2026-03-13T16:56:39.797",
+        "Identifier": "3",
+        "MovementType": 1,
+        "Description": "SENAT",
+        "AdjustmentType": "Debit",
+        "Value": 0
+      },
+      {
+        "Date": "2026-03-13T16:56:39.877",
+        "Identifier": "119",
+        "MovementType": 1,
+        "Description": "Taxa Ativação Cartão Debito",
+        "AdjustmentType": "Debit",
+        "Value": -18.69
+      }
+    ],
+    "BranchCode": "1",
+    "HiredCountry": 55,
+    "LoadBrazilianNCM": "0001",
+    "ShippingReceiver": {
+      "Country": "Brazil",
+      "NationalId": "83011460000142",
+      "Name": "SUL BRASIL IND E COM PLAST. E METALICOS S.A",
+      "ReceiverType": "Company"
+    },
+    "MainDriverCountry": 55,
+    "Occurences": [],
+    "VPRCardNumber": 700021825,
+    "VPRValue": 0,
+    "VPRAnttStatus": "Pendente",
+    "VPRAntt": [],
+    "VPRType": null,
+    "VPRTag": null,
+    "VPRStatus": "",
+    "SupplierDocument": "65.697.260/0001-03",
+    "SupplierName": "REPOM S.A",
+    "ExternalShippingID": [],
+    "RouteDescription": "Eunápolis (BA) - Santa Cruz Cabrália (BA)",
+    "TraceDescription": "BA-001 / BR-36 IDA E VOLTA",
+    "TraceIdentifier": "20002",
+    "ShippingFuel": {
+      "FuelCardNumber": "0",
+      "FuelValue": 0
+    },
+    "CIOTShippingType": 1,
+    "CIOTShippingTypeDescription": "Viagem padrão",
+    "ContractId": 4920272,
+    "ExpectedPaymentDate": null,
+    "EffectivePaymentDate": "2026-03-13T15:59:35.857"
+  }
+}

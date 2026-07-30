@@ -1,0 +1,843 @@
+[
+    {
+        "Identifier": "29260102028263000134580000000194581216106157",
+        "Country": "BRAZIL",
+        "HiredCountry": "BRAZIL",
+        "HiredNationalId": "02028263000134",
+        "OperationIdentifier": 19458,
+        "CardNumber": 700021821,
+        "VPRCardNumber": 0,
+        "BrazilianRouteTraceCode": 260,
+        "BrazilianRouteRouteCode": 142096,
+        "IssueDate": "2026-01-20T23:24:17Z",
+        "TotalLoadWeight": 2681.655812,
+        "TotalLoadValue": 64536.81,
+        "AdvanceMoneyValue": 0,
+        "BranchCode": "1",
+        "LoadBrazilianNCM": null,
+        "LoadBrazilianANTTCodeType": 0,
+        "BrazilianIBGECodeSource": null,
+        "BrazilianIBGECodeDestination": 2910727,
+        "BrazilianCEPSource": "45829110",
+        "BrazilianCEPDestination": 0,
+        "TravelledDistance": 0,
+        "VPR": {
+            "Issue": "FALSE",
+            "VPROneWay": "FALSE",
+            "VPRSuspendedAxleNumber": 0,
+            "VPRReturnSuspendedAxleNumber": 0,
+            "MandatoryVPRType": 0,
+            "SubhiredNationalId": null
+        },
+        "ShippingPayment": {
+            "ExpectedDeliveryDate": "2026-01-27T11:56:42.399Z",
+            "ExpectedDeliveryLocationType": "Branch"
+        },
+        "Drivers": [
+            {
+                "Country": "Brazil",
+                "NationalId": "00823051536",
+                "Main": "TRUE"
+            }
+        ],
+        "Documents": [
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228305,
+                "EletronicKey": "29260102028263000134550010012283051946163243",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781842,
+                "EletronicKey": "29260108051725000110550010007818421149176521",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781876,
+                "EletronicKey": "29260108051725000110550010007818761261513125",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228333,
+                "EletronicKey": "29260102028263000134550010012283331569201246",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228332,
+                "EletronicKey": "29260102028263000134550010012283321113178341",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781875,
+                "EletronicKey": "29260108051725000110550010007818751522312619",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781874,
+                "EletronicKey": "29260108051725000110550010007818741799423470",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228329,
+                "EletronicKey": "29260102028263000134550010012283291112193252",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781869,
+                "EletronicKey": "29260108051725000110550010007818691786322719",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781868,
+                "EletronicKey": "29260108051725000110550010007818681490100226",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228325,
+                "EletronicKey": "29260102028263000134550010012283251334410510",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781866,
+                "EletronicKey": "29260108051725000110550010007818661116288128",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228324,
+                "EletronicKey": "29260102028263000134550010012283241160206109",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228323,
+                "EletronicKey": "29260102028263000134550010012283231733173800",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228322,
+                "EletronicKey": "29260102028263000134550010012283221197167161",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781861,
+                "EletronicKey": "29260108051725000110550010007818611186212868",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781859,
+                "EletronicKey": "29260108051725000110550010007818591234207115",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781858,
+                "EletronicKey": "29260108051725000110550010007818581222112192",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781857,
+                "EletronicKey": "29260108051725000110550010007818571118213134",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781856,
+                "EletronicKey": "29260108051725000110550010007818561482532448",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781855,
+                "EletronicKey": "29260108051725000110550010007818551144199165",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781854,
+                "EletronicKey": "29260108051725000110550010007818541164210221",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781853,
+                "EletronicKey": "29260108051725000110550010007818531106244677",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781852,
+                "EletronicKey": "29260108051725000110550010007818521162543415",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781851,
+                "EletronicKey": "29260108051725000110550010007818511104580195",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781850,
+                "EletronicKey": "29260108051725000110550010007818501187142193",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228321,
+                "EletronicKey": "29260102028263000134550010012283211157171225",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228320,
+                "EletronicKey": "29260102028263000134550010012283201230198160",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781849,
+                "EletronicKey": "29260108051725000110550010007818491249821098",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781848,
+                "EletronicKey": "29260108051725000110550010007818481235204248",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228319,
+                "EletronicKey": "29260102028263000134550010012283191111101153",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228318,
+                "EletronicKey": "29260102028263000134550010012283181121237476",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781847,
+                "EletronicKey": "29260108051725000110550010007818471220149141",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228317,
+                "EletronicKey": "29260102028263000134550010012283171321821204",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228316,
+                "EletronicKey": "29260102028263000134550010012283161101518327",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228315,
+                "EletronicKey": "29260102028263000134550010012283151129137100",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228314,
+                "EletronicKey": "29260102028263000134550010012283141100108163",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228313,
+                "EletronicKey": "29260102028263000134550010012283131238170103",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781846,
+                "EletronicKey": "29260108051725000110550010007818461234255871",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228312,
+                "EletronicKey": "29260102028263000134550010012283121177120937",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781845,
+                "EletronicKey": "29260108051725000110550010007818451987316420",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781844,
+                "EletronicKey": "29260108051725000110550010007818441821222216",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228311,
+                "EletronicKey": "29260102028263000134550010012283111871861965",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228310,
+                "EletronicKey": "29260102028263000134550010012283101250713446",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228309,
+                "EletronicKey": "29260102028263000134550010012283091254217221",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781843,
+                "EletronicKey": "29260108051725000110550010007818431117221103",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228308,
+                "EletronicKey": "29260102028263000134550010012283081969619920",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228307,
+                "EletronicKey": "29260102028263000134550010012283071651802045",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "1",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 1228306,
+                "EletronicKey": "29260102028263000134550010012283061519093191",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            },
+            {
+                "BranchCode": "2",
+                "DocumentType": 1,
+                "Series": "1",
+                "Number": 781877,
+                "EletronicKey": "29260108051725000110550010007818771210761510",
+                "CheckDocument": "true",
+                "DocumentCheckLists": [
+                    {
+                        "Id": 0,
+                        "PaymentBlock": "true"
+                    }
+                ],
+                "DeliveryLocationType": "Branch"
+            }
+        ],
+        "Vehicles": [
+            {
+                "Country": "Brazil",
+                "LicensePlate": "PJI9635"
+            }
+        ],
+        "AccountingAdjustments": [
+            {
+                "Identifier": "Adjustment1",
+                "Value": 0
+            }
+        ],
+        "ShippingReceiver": {
+            "Country": "BRAZIL",
+            "NationalId": null,
+            "Name": null,
+            "ReceiverType": "Company"
+        },
+        "Taxes": [
+            {
+                "Type": "IRRF",
+                "Value": 0
+            }
+        ],
+        "ShippingFuel": {
+            "FuelCardNumber": null,
+            "FuelValue": 0
+        },
+        "ProcessingShippingType": "OnlyFreight",
+        "Outsourcing": "true",
+        "BillingBreak": "NotCharge",
+        "ToleranceBreak": 0,
+        "FreightBreak": "true",
+        "CIOTShippingType": 0,
+        "ExistingContractId": 0,
+        "TransportationCustomer": "string",
+        "DigitalDocument": "true",
+        "PhysicalDocument": "true",
+        "GeneralObservation": "string",
+        "SubcontractorID": "string",
+        "SubcontractorAdvancePercentage": 0,
+        "SubcontractorFinalBalancePercentage": 0,
+        "MinimumFreightCost": {
+            "DistanceTravel": 0,
+            "EmptyReturn": "true",
+            "HighPerformanceTransport": "true"
+        }
+    }
+]

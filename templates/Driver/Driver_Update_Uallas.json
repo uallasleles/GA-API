@@ -1,0 +1,23 @@
+{
+    "DriverLicenseNumber": "04862861767",
+    "Address": {
+        "Street": "Rua da Liberdade",
+        "Number": "273",
+        "Complement": "Casa",
+        "Neighborhood": "Santa Lúcia",
+        "ZipCode": "45822250"
+    },
+    "Phones": [
+        {
+            "AreaCode": "73",
+            "Number": "998728479",
+            "Preferential": true,
+            "TypeId": "Cell"
+        }
+    ],
+    "DriverPersonalInformation": {
+        "BirthDate": "1988-09-26T18:00:00.000Z",
+        "Name": "Uallas Leles Pereira",
+        "Gender": "Male"
+    }
+}

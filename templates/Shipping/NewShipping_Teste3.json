@@ -1,0 +1,92 @@
+[
+  {
+    "Identifier": "Teste123",
+    "Country": 55,
+    "HiredCountry": 55,
+    "HiredNationalId": "61327350000151",
+    "OperationIdentifier": "1",
+    "CardNumber": 700021825,
+    "VPRCardNumber": 0,
+    "BrazilianRouteTraceCode": 1,
+    "BrazilianRouteRouteCode": 142999,
+    "IssueDate": "2026-03-13T00:00:00",
+    "TotalFreightValue": 1821.6,
+    "TotalLoadWeight": 4140.0,
+    "TotalLoadValue": 33281.98,
+    "AdvanceMoneyValue": 0.0,
+    "VPR": {
+      "Issue": false,
+      "VPROneWay": false,
+      "VPRSuspendedAxleNumber": 0,
+      "VPRReturnSuspendedAxleNumber": 0,
+      "SubhiredNationalID": null
+    },
+    "ShippingPayment": {
+      "ExpectedDeliveryDate": "2026-03-14T00:00:00",
+      "ExpectedDeliveryLocationType": "Branch"
+    },
+    "Drivers": [
+      {
+        "Country": 55,
+        "NationalId": "04170803523",
+        "Main": true
+      }
+    ],
+    "Documents": [
+      {
+        "BranchCode": "1",
+        "DocumentType": 2,
+        "Series": "1",
+        "Number": "1236235",
+        "EletronicKey": "29260302028263000134550010012362351862412710",
+        "CheckDocument": null
+      }
+    ],
+    "Vehicles": [
+      {
+        "Country": "Brazil",
+        "LicensePlate": "OUZ0I77"
+      }
+    ],
+    "AccountingAdjustments": null,
+    "BranchCode": "1",
+    "LoadBrazilianNCM": "0001",
+    "LoadBrazilianANTTCodeType": 5,
+    
+    "ShippingReceiver": {
+      "Country": 55,
+      "NationalId": "83011460000142",
+      "Name": "SUL BRASIL IND E COM PLAST. E METALICOS S.A",
+      "ReceiverType": "Company"
+    },
+    
+    "BrazilianIBGECodeSource": "0107278",
+    "BrazilianIBGECodeDestination": "0027705",
+    "BrazilianCEPSource": 78840000,
+    "BrazilianCEPDestination": 11035260,
+    "TravelledDistance": 630,
+
+    "Taxes": [
+      {
+        "Type": 1,
+        "Value": 0.0
+      },
+      {
+        "Type": 34,
+        "Value": 0.0
+      },
+      {
+        "Type": 2,
+        "Value": 0.0
+      },
+      {
+        "Type": 3,
+        "Value": 0.0
+      }
+    ],
+    "Outsourcing": null,
+    "BillingBreak": null,
+    "ToleranceBreak": null,
+    "FreightBreak": null
+  }
+]

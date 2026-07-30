@@ -1,0 +1,22 @@
+{
+    "Country": "Brazil",
+    "LicensePlate": "FGB2110",
+    "VehicleClassification": "Traction",
+    "VehicleCategory": "Passenger",
+    "VehicleAxles": "Axle02",
+    "Type": "CityDelivery",
+    "VehicleOwner": {
+        "Country": "Brazil",
+        "NationalId": "46756599933",
+        "BrazilianSettings": {
+            "RNTRC": "012815332",
+            "VehiclePessoaJuridica": {
+                "NomeFantasia": "Uallas Leles Pereira LTDA"
+            }
+        },
+        "Type": "Person",
+        "VehiclePersonalInformation": {
+            "Name": "Uallas Leles Pereira"
+        }
+    }
+}

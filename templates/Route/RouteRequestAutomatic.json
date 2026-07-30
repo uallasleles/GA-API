@@ -1,0 +1,21 @@
+{
+    "OriginPostalCode": "string",
+    "OriginLongitude": "string",
+    "OriginLatitude": "string",
+    "DestinyPostalCode": "string",
+    "DestinyLongitude": "string",
+    "DestinyLatitude": "string",
+    "RouteStop": [
+        {
+            "PostalCode": "string",
+            "IBGECode": "string",
+            "Latitude": "string",
+            "Longitude": "string"
+        }
+    ],
+    "BranchCode": "string",
+    "OriginIBGECode": "string",
+    "DestinyIBGECode": "string",
+    "RoundTrip": true,
+    "TraceIdentifier": "string"
+}

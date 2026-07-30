@@ -1,0 +1,72 @@
+cells:
+  - kind: 2
+    value: "SELECT \r
+
+      \    -- 1. Métricas Financeiras (Valores)\r
+
+      \    ROUND(SUM(CASE WHEN PCMOV.CODOPER = 'S' THEN PCMOV.QT * PCMOV.PUNIT
+      ELSE 0 END), 2) AS VALOR_BRUTO,\r
+
+      \    ROUND(SUM(CASE WHEN PCMOV.CODOPER = 'ED' THEN PCMOV.QT * PCMOV.PUNIT
+      ELSE 0 END), 2) AS VALOR_DEVOLUCAO,\r
+
+      \    ROUND(\r
+
+      \        SUM(CASE WHEN PCMOV.CODOPER = 'S' THEN PCMOV.QT * PCMOV.PUNIT
+      ELSE 0 END) - \r
+
+      \        SUM(CASE WHEN PCMOV.CODOPER = 'ED' THEN PCMOV.QT * PCMOV.PUNIT
+      ELSE 0 END), \r
+
+      \    2) AS VALOR_LIQUIDO,\r
+
+      \r
+
+      \    -- 2. Métricas Físicas (Quantidades)\r
+
+      \    SUM(CASE WHEN PCMOV.CODOPER = 'S' THEN PCMOV.QT ELSE 0 END) AS
+      QT_VENDIDA,\r
+
+      \    SUM(CASE WHEN PCMOV.CODOPER = 'ED' THEN PCMOV.QT ELSE 0 END) AS
+      QT_DEVOLVIDA,\r
+
+      \    SUM(CASE WHEN PCMOV.CODOPER = 'S' THEN PCMOV.QT ELSE 0 END) - \r
+
+      \    SUM(CASE WHEN PCMOV.CODOPER = 'ED' THEN PCMOV.QT ELSE 0 END) AS
+      QT_LIQUIDA\r
+
+      \r
+
+      FROM PCMOV\r
+
+      JOIN PCPRODUT ON (PCPRODUT.CODPROD = PCMOV.CODPROD)\r
+
+      WHERE PCPRODUT.CODFORNEC = 5503\r
+
+      \  AND PCMOV.DTMOV BETWEEN TO_DATE('17/05/2026', 'DD/MM/YYYY') AND
+      TO_DATE('13/06/2026', 'DD/MM/YYYY')\r
+
+      \  AND PCMOV.CODFILIAL = 2 -- Informar a filial que deseja.\r
+
+      \  AND PCMOV.CODOPER IN ('S', 'ED');"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT \r
+
+      \  PCPRODUT.CODAUXILIAR, SUM(PCHISTEST.QTESTGER) QTESTGER\r
+
+      FROM PCHISTEST\r
+
+      INNER JOIN PCPRODUT ON PCHISTEST.CODPROD = PCPRODUT.CODPROD\r
+
+      WHERE 1=1 \r
+
+      \  AND PCHISTEST.CODFILIAL = 2 \r
+
+      \  AND DATA = TO_DATE('2026-06-13', 'YYYY-MM-DD') \r
+
+      \  AND PCPRODUT.CODPROD in (select codprod from PCPRODUT where codfornec =
+      5503)\r
+
+      GROUP BY PCPRODUT.CODAUXILIAR;"
+    languageId: oracle-sql

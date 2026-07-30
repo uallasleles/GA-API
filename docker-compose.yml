@@ -1,0 +1,72 @@
+version: "3.7"
+
+services:
+  ga-api:
+    image: ga-api:latest
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      MYAPI_ACCESS_TOKEN_EXPIRE_MINUTES: ${MYAPI_ACCESS_TOKEN_EXPIRE_MINUTES}
+      IS_PRODUCTION: ${IS_PRODUCTION}
+      ORACLEDB_USERNAME: ${ORACLEDB_USERNAME}
+      ORACLEDB_PASSWORD: ${ORACLEDB_PASSWORD}
+      ORACLEDB_DSN: ${ORACLEDB_DSN}
+      API_BASE_URL: ${API_BASE_URL}
+      API_SERVER: ${API_SERVER}
+      API_GRANT_TYPE: ${API_GRANT_TYPE}
+      API_VERSION: ${API_VERSION}
+      API_TIMEOUT: ${API_TIMEOUT}
+      API_USERNAME: ${API_USERNAME}
+      API_PASSWORD: ${API_PASSWORD}
+      API_PARTNER: ${API_PARTNER}
+      API_USERNAME_CHOCOSUL: ${API_USERNAME_CHOCOSUL}
+      API_PASSWORD_CHOCOSUL: ${API_PASSWORD_CHOCOSUL}
+      API_PARTNER_CHOCOSUL: ${API_PARTNER_CHOCOSUL}
+      API_USERNAME_MASTTER: ${API_USERNAME_MASTTER}
+      API_PASSWORD_MASTTER: ${API_PASSWORD_MASTTER}
+      API_PARTNER_MASTTER: ${API_PARTNER_MASTTER}
+      API_USERNAME_LAZAROLOG: ${API_USERNAME_LAZAROLOG}
+      API_PASSWORD_LAZAROLOG: ${API_PASSWORD_LAZAROLOG}
+      API_PARTNER_LAZAROLOG: ${API_PARTNER_LAZAROLOG}
+      LOGGER_API_URL: ${LOGGER_API_URL}
+      LOGGER_API_KEY: ${LOGGER_API_KEY}
+    networks:
+      - network_public
+      - ga_api_internal
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.ga-api.rule=Host(`gaapi.grupoastoria.com.br`)
+        - traefik.http.routers.ga-api.entrypoints=websecure
+        - traefik.http.routers.ga-api.tls=true
+        - traefik.http.routers.ga-api.tls.certresolver=letsencryptresolver
+        - traefik.http.services.ga-api.loadbalancer.server.port=8088
+        - traefik.docker.network=minha_rede
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ga_api_pgdata:/var/lib/postgresql/data
+    networks:
+      - ga_api_internal
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  network_public:
+    external: true
+    name: minha_rede
+  ga_api_internal:
+    driver: overlay
+
+volumes:
+  ga_api_pgdata:

@@ -1,0 +1,22 @@
+{
+    "Country": "Brazil",
+    "LicensePlate": "ICG5748",
+    "VehicleClassification": "Traction",
+    "VehicleCategory": "HeavyCommercial",
+    "VehicleAxles": "Axle04",
+    "Type": "Truck",
+    "VehicleOwner": {
+        "Country": "Brazil",
+        "NationalId": 26965267020,
+        "BrazilianSettings": {
+            "RNTRC": "000259926",
+            "VehiclePessoaJuridica": {
+            "NomeFantasia": "Uallas Leles Pereira LTDA"
+            }
+        },
+        "Type": "Person",
+        "VehiclePersonalInformation": {
+            "Name": "Uallas Leles Pereira"
+        }
+    }
+}

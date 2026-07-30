@@ -1,0 +1,1 @@
+nohup .venv/bin/python main.py &

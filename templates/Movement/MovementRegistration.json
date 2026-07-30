@@ -1,0 +1,8 @@
+{
+    "CodigoCliente": "string",
+    "NomeMovimento": "string",
+    "TipoMovimento": "string",
+    "IncideSobreImposto": true,
+    "IncideSobreFrete": true,
+    "LiberaSaldo": true
+}

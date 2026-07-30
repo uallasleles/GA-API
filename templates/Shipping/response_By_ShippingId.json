@@ -1,0 +1,133 @@
+{
+  "Response": {
+    "StatusCode": 200
+  },
+  "Result": {
+    "ShippingId": 2065551,
+    "CIOT": "",
+    "CIOTInContingency": 0,
+    "Status": "Cancelled",
+    "Identifier": "Teste123",
+    "HiredNationalId": "61327350000151",
+    "OperationIdentifier": "1",
+    "CardNumber": 700021825,
+    "BrazilianRouteTraceCode": 1,
+    "BrazilianRouteRouteCode": 142999,
+    "ShippingPayment": {
+      "ExpectedDeliveryDate": "2026-03-14T00:00:00",
+      "ExpectedDeliveryLocationType": "Branch",
+      "DeliveryLocationName": "",
+      "DeliveryLocationUser": "",
+      "DeliveryLocationType": "",
+      "DeliveryDate": "0001-01-01T00:00:00"
+    },
+    "IssueDate": "2026-03-13T10:49:18.793",
+    "TotalFreightValue": 1821.6,
+    "TotalLoadWeight": 4140,
+    "TotalLoadValue": 33281.98,
+    "AdvanceMoneyValue": 0,
+    "ConsumedValue": 0,
+    "Drivers": [
+      {
+        "Country": "Brazil",
+        "NationalId": "04170803523",
+        "Main": true
+      }
+    ],
+    "Documents": [
+      {
+        "BranchCode": "1",
+        "DocumentType": "NFe",
+        "Series": "1",
+        "Number": "1236235",
+        "EletronicKey": "29260302028263000134550010012362351862412710",
+        "CheckDocument": null,
+        "DocumentCheckLists": [],
+        "DeliveryLocationType": null
+      }
+    ],
+    "Vehicles": [
+      {
+        "Country": "Brazil",
+        "LicensePlate": "OUZ0I77"
+      }
+    ],
+    "AccountingAdjustments": [
+      {
+        "Date": "2026-03-13T10:49:21.797",
+        "Identifier": "99",
+        "MovementType": 1,
+        "Description": "Saldo de Emissao de Viagem",
+        "AdjustmentType": "Credit",
+        "Value": 1821.6
+      },
+      {
+        "Date": "2026-03-13T10:49:22.033",
+        "Identifier": "119",
+        "MovementType": 1,
+        "Description": "Taxa Ativação Cartão Debito",
+        "AdjustmentType": "Debit",
+        "Value": -18.69
+      },
+      {
+        "Date": "2026-03-13T10:49:57.073",
+        "Identifier": "111",
+        "MovementType": 1,
+        "Description": "Cancelamento",
+        "AdjustmentType": "Debit",
+        "Value": -1821.6
+      }
+    ],
+    "BranchCode": "1",
+    "HiredCountry": 55,
+    "LoadBrazilianNCM": "0001",
+    "ShippingReceiver": {
+      "Country": "Brazil",
+      "NationalId": "83011460000142",
+      "Name": "SUL BRASIL IND E COM PLAST. E METALICOS S.A",
+      "ReceiverType": "Company"
+    },
+    "MainDriverCountry": 55,
+    "Occurences": [
+      {
+        "Type": 15,
+        "Detail": "Cancelamento de viagem",
+        "IssueDate": "2026-03-13T10:49:57.203"
+      },
+      {
+        "Type": "ErrorInCIOTEmissionAttempt",
+        "Detail": "Erro ao emitir CIOT, a viagem foi cancelada automaticamente",
+        "IssueDate": "2026-03-13T10:49:56.503"
+      },
+      {
+        "Type": "ErrorInCIOTEmissionAttempt",
+        "Detail": "Erro na Tentativa de Emissão do CIOT na ANTT:  [\"Rejeição: A placa OUZ0I77 não pertence ao transportador de RNTRC 003807184 ou o mesmo não está ativo.\" \"Rejeição: O veículo OUZ0I77 não pertence ao RNTRC 048343735.\" \"Rejeição: Nenhum dos veículos informado",
+        "IssueDate": "2026-03-13T10:49:56.47"
+      }
+    ],
+    "VPRCardNumber": 700021825,
+    "VPRValue": 0,
+    "VPRAnttStatus": "Pendente",
+    "VPRAntt": [],
+    "VPRType": null,
+    "VPRTag": null,
+    "VPRStatus": "",
+    "SupplierDocument": "65.697.260/0001-03",
+    "SupplierName": "REPOM S.A",
+    "ExternalShippingID": [],
+    "RouteDescription": "Eunápolis (BA) - Santa Cruz Cabrália (BA)",
+    "TraceDescription": "BA-001 / BR-36 IDA E VOLTA",
+    "TraceIdentifier": "20002",
+    "ShippingFuel": {
+      "FuelCardNumber": "0",
+      "FuelValue": 0
+    },
+    "CancellationType": "Automatic",
+    "ReasonCancelation": "Erro na Tentativa de Emissão do CIOT na ANTT:  [\"Rejeição: A placa OUZ0I77 não pertence ao transportador de RNTRC 003807184 ou o mesmo não está ativo.\" \"Rejeição: O veículo OUZ0I77 não pertence ao RNTRC 048343735.\" \"Rejeição: Nenhum dos veículos informado",
+    "CIOTShippingType": 1,
+    "CIOTShippingTypeDescription": "Viagem padrão",
+    "ContractId": 4920206,
+    "ExpectedPaymentDate": null,
+    "EffectivePaymentDate": "2026-03-13T09:07:35.46"
+  }
+}

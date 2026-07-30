@@ -1,0 +1,25 @@
+{
+  "Country": "Brazil",
+  "NationalId": "05144675506",
+  "DriverLicenseNumber": null,
+  "Address": {
+    "Street": "CAMINHO 7",
+    "Number": null,
+    "Complement": null,
+    "Neighborhood": "THAIGO DE MELLO",
+    "ZipCode": "45826344"
+  },
+  "Phones": [
+    {
+      "AreaCode": 0,
+      "Number": "7399130224",
+      "Preferential": "true",
+      "TypeId": "CELL"
+    }
+  ],
+  "DriverPersonalInformation": {
+    "BirthDate": "1989-02-26T00:00:00Z",
+    "Name": "IZAIAS SOUZA ALVES AST",
+    "Gender": "Male"
+  }
+}

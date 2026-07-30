@@ -1,0 +1,3 @@
+-- select * from tasks;
+-- delete from tasks where table_name = 'CHOCOSUL.PCUSUARI'
+-- delete from tasks where table_name = 'CHOCOSUL.PCAUTORI'

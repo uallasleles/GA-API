@@ -1,0 +1,115 @@
+cells:
+  - kind: 2
+    value: "/*
+      =========================================================================\
+      ====\r
+
+      \   FINALIDADE ..: Extração de dados de Contas a Receber para exportação
+      ao\r
+
+      \                  BigQuery da Risco Zero (gestão de dados, análise de
+      crédito\r
+
+      \                  e avaliação de risco de inadimplência).\r
+
+      \   ORIGEM ......: WinThor (PCPREST - títulos de cobrança / PCCLIENT -
+      cadastro\r
+
+      \                  de clientes)\r
+
+      \   LAYOUT ......: cnpjparceiro (STRING) | cnpj (STRING) | telefone
+      (STRING)\r
+
+      \                  | dtalancto (DATE) | numdocumento (STRING) | valor
+      (FLOAT)\r
+
+      \                  | dtacompensacao (DATE) | dtavencimento (DATE)\r
+
+      \   OBSERVAÇÃO ..: Ajustei nomes de coluna do PCCLIENT (CGCENT, TELENT)
+      pelo\r
+
+      \                  padrão usual do WinThor — confirme no seu ambiente,
+      pois\r
+
+      \                  pode variar conforme customização/versão (ex.:
+      TELENT1,\r
+
+      \                  TELCOM, FONE). Da PCPREST usei DTEMISSAO, DTVENC e
+      DTBAIXA,\r
+
+      \                  que já documentamos juntos; VALOR e NUMDOCUMENTO eu
+      supus\r
+
+      \                  como PCPREST.VALOR e PCPREST.DUPLIC — não vieram na\r
+
+      \                  listagem de colunas que você me mandou (o script
+      estava\r
+
+      \                  truncado em NUMCAR), então vale conferir se existem
+      mesmo\r
+
+      \                  com esse nome antes de rodar em produção.\r
+
+      \   =====================================================================\
+      ======== */\r
+
+      \r
+
+      SELECT\r
+
+      \      fl.CGC                               \t\tAS cnpjparceiro    -- CNPJ
+      do Grupo Astoria (fixo/bind, não vem do banco)\r
+
+      \    , TRIM(cli.CGCENT)                          AS cnpj            --
+      CNPJ (PJ) ou CPF (PF) do cliente na Receita Federal\r
+
+      \    , TRIM(cli.TELENT)                          AS telefone        --
+      Telefone principal de contato do cliente\r
+
+      \    , TO_CHAR(pr.DTEMISSAO, 'YYYY-MM-DD')       AS dtalancto       --
+      Data de lançamento da compra/título no sistema\r
+
+      \    , TRIM(pr.DUPLIC)                           AS numdocumento    --
+      Número do documento de registro no sistema\r
+
+      \    , pr.VALOR                                  AS valor           --
+      Valor do título (compras parceladas: uma linha por parcela)\r
+
+      \    , TO_CHAR(pr.DTBAIXA, 'YYYY-MM-DD')         AS dtacompensacao  --
+      Data em que foi efetuado o pagamento do título\r
+
+      \    , TO_CHAR(pr.DTVENC, 'YYYY-MM-DD')          AS dtavencimento   --
+      Data de início de contagem para vencimento do título\r
+
+      FROM\r
+
+      \    PCPREST pr\r
+
+      \    INNER JOIN PCCLIENT cli\r
+
+      \        ON cli.CODCLI = pr.CODCLI\r
+
+      \tINNER JOIN PCFILIAL fl \r
+
+      \t\tON pr.CODFILIAL = fl.CODIGO\r
+
+      WHERE\r
+
+      \    pr.CODFILIAL = :codfilial                     -- filtra a(s)
+      filial(is) que farão parte do envio\r
+
+      \    AND pr.DTEMISSAO >= :dtinicio                 -- janela de extração
+      (incremental) - ex: última data já exportada\r
+
+      \    AND pr.DTEMISSAO < :dtfim\r
+
+      \    AND pr.CANCELDESD IS NULL                     -- exclui títulos com
+      desdobramento cancelado\r
+
+      ORDER BY\r
+
+      \    pr.DTEMISSAO;"
+    languageId: oracle-sql
+  - kind: 2
+    value: select * from pcfilial
+    languageId: oracle-sql

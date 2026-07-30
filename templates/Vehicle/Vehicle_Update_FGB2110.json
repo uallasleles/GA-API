@@ -1,0 +1,20 @@
+{
+    "Type": "CityDelivery",
+    "VehicleCategory": "Passenger",
+    "VehicleAxles": "Axle01",
+    "VehicleClassification": "Implement",
+    "VehicleOwner": {
+        "Country": "Brazil",
+        "NationalId": "16545346091",
+        "BrazilianSettings": {
+            "RNTRC": "002314495",
+            "VehiclePessoaJuridica": {
+                "NomeFantasia": "Maciel Moto"
+            }
+        },
+        "Type": "Person",
+        "VehiclePersonalInformation": {
+            "Name": "Jose Oliveira Maciel"
+        }
+    }
+}
