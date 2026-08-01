@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="toolbar">
+  <h1>Usuários</h1>
+  <a class="btn" href="/admin/users/new">+ Novo usuário</a>
+</div>
+<table>
+  <thead>
+    <tr><th>Login</th><th>Nome</th><th>E-mail</th><th>Papéis</th><th>Status</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>{{ user.full_name or "-" }}</td>
+      <td>{{ user.email or "-" }}</td>
+      <td>
+        {% for role in user.roles %}<span class="badge">{{ role.name }}</span>{% else %}-{% endfor %}
+      </td>
+      <td>
+        {% if user.disabled %}<span class="badge blocked">Bloqueado</span>{% else %}<span class="badge active">Ativo</span>{% endif %}
+      </td>
+      <td class="actions">
+        <a href="/admin/users/{{ user.id }}/edit">Editar</a>
+        <form method="post" action="/admin/users/{{ user.id }}/toggle" style="display:inline">
+          <button type="submit" class="{{ 'danger' if not user.disabled else '' }}">
+            {{ "Desbloquear" if user.disabled else "Bloquear" }}
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">Nenhum usuário cadastrado.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

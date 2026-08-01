@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ "Editar papel" if role else "Novo papel" }}</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form class="card" method="post" action="{{ ('/admin/roles/' ~ role.id ~ '/edit') if role else '/admin/roles/new' }}">
+  <label for="name">Nome</label>
+  <input id="name" name="name" type="text" value="{{ role.name if role else '' }}" required autofocus>
+  <label for="description">Descrição</label>
+  <input id="description" name="description" type="text" value="{{ role.description if role else '' }}">
+  <label>Permissões</label>
+  <div class="checkbox-list">
+    {% for scope, description in available_scopes.items() %}
+    <label>
+      <input type="checkbox" name="scopes" value="{{ scope }}" {{ "checked" if scope in selected_scopes else "" }}>
+      <strong>{{ scope }}</strong> &mdash; {{ description }}
+    </label>
+    {% endfor %}
+  </div>
+  <div class="form-actions">
+    <button class="btn" type="submit">Salvar</button>
+  </div>
+</form>
+{% endblock %}

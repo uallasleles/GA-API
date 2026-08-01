@@ -1,17 +1,18 @@
-import hashlib
 import hmac
 import os
-import time
 
 from fastapi import APIRouter, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from auth.session import SignedSession
+
 DOCS_USERNAME = os.getenv("DOCS_USERNAME")
 DOCS_PASSWORD = os.getenv("DOCS_PASSWORD")
-DOCS_SESSION_SECRET = os.getenv("DOCS_SESSION_SECRET")
 
 COOKIE_NAME = "docs_session"
 SESSION_MAX_AGE = 8 * 60 * 60  # 8 horas
+
+session = SignedSession(secret=os.getenv("DOCS_SESSION_SECRET"), max_age_seconds=SESSION_MAX_AGE)
 
 router = APIRouter(include_in_schema=False)
 
@@ -114,28 +115,9 @@ LOGIN_PAGE = """<!doctype html>
 """
 
 
-def _sign(value: str) -> str:
-    mac = hmac.new(DOCS_SESSION_SECRET.encode(), value.encode(), hashlib.sha256).hexdigest()
-    return f"{value}.{mac}"
-
-
-def _verify(token: str) -> bool:
-    try:
-        issued_at, mac = token.rsplit(".", 1)
-    except ValueError:
-        return False
-    expected = hmac.new(DOCS_SESSION_SECRET.encode(), issued_at.encode(), hashlib.sha256).hexdigest()
-    if not hmac.compare_digest(mac, expected):
-        return False
-    try:
-        return (time.time() - int(issued_at)) < SESSION_MAX_AGE
-    except ValueError:
-        return False
-
-
 async def require_docs_session(request: Request):
     token = request.cookies.get(COOKIE_NAME)
-    if not token or not _verify(token):
+    if not session.verify(token):
         raise HTTPException(
             status_code=status.HTTP_303_SEE_OTHER,
             headers={"Location": "/docs-login"},
@@ -157,11 +139,10 @@ async def docs_login_submit(username: str = Form(...), password: str = Form(...)
         error_html = '<p class="error">Usuário ou senha inválidos.</p>'
         return HTMLResponse(LOGIN_PAGE.format(error=error_html), status_code=status.HTTP_401_UNAUTHORIZED)
 
-    token = _sign(str(int(time.time())))
     response = RedirectResponse(url="/docs", status_code=status.HTTP_302_FOUND)
     response.set_cookie(
         COOKIE_NAME,
-        token,
+        session.issue(),
         httponly=True,
         secure=True,
         samesite="lax",

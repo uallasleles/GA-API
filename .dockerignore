@@ -9,7 +9,7 @@ config.json
 
 data/
 lib/
-templates/
+/templates/
 docs/
 queries/*.sqlnb
 

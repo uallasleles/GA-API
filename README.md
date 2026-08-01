@@ -71,6 +71,7 @@ Ver [.env.example](.env.example) para a lista completa. Resumo:
 | `MYAPI_ACCESS_TOKEN_EXPIRE_MINUTES` | Expiração do token de acesso, em minutos |
 | `DOCS_USERNAME`, `DOCS_PASSWORD` | Credenciais de acesso à página de login de `/docs` e `/openapi.json` |
 | `DOCS_SESSION_SECRET` | Chave de assinatura do cookie de sessão do login de `/docs` — gerar com `openssl rand -hex 32` |
+| `ADMIN_SESSION_SECRET` | Chave de assinatura do cookie de sessão do painel `/admin` — gerar com `openssl rand -hex 32` |
 | `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Credenciais do Postgres da aplicação (usuários) |
 | `DATABASE_URL` | Montada automaticamente no `docker-compose.yml` a partir das variáveis `POSTGRES_*` |
 
@@ -80,6 +81,12 @@ Ver [.env.example](.env.example) para a lista completa. Resumo:
 
 `/docs` e `/openapi.json` ficam atrás de uma tela de login própria (`/docs-login`) — cookie de sessão assinado, válido por 8h, credenciais fixas em `DOCS_USERNAME`/`DOCS_PASSWORD` (não tem relação com os usuários do Postgres nem com o fluxo de token via `/Auth/token`, que continua público e sem essa proteção). Ver [auth/docs_auth.py](auth/docs_auth.py).
 
-## Usuários
+## Usuários e permissões (/admin)
 
-Os usuários antes hardcoded em `auth/Auth.py` (`fake_users_db`) agora vivem na tabela `user` do Postgres, criada e semeada pela migration Alembic (`alembic/versions/0002_seed_users.py`) com os mesmos hashes de senha já existentes. Para criar/alterar usuários depois do deploy, use uma sessão SQLModel contra o Postgres da stack (ou uma nova migration).
+Os usuários antes hardcoded em `auth/Auth.py` (`fake_users_db`) agora vivem na tabela `user` do Postgres. Permissões não são mais uma lista de scopes por usuário — são atribuídas via **papéis (roles)**: cada papel tem um conjunto de scopes, e cada usuário tem um ou mais papéis. Os scopes efetivos de um usuário são a união dos scopes de todos os seus papéis (calculado em `auth/Auth.py:get_user`).
+
+Gerenciamento é feito pelo painel `/admin` (`GET /admin/users`, `GET /admin/roles`) — login com uma conta do Postgres que tenha o scope `admin` (ex.: `uallasleles`, já semeado com o papel "Admin" pela migration `0003_roles_and_permissions`). O painel permite:
+- Criar usuários, definir senha, bloquear/desbloquear login (campo `disabled`) e atribuir papéis.
+- Criar/editar papéis e escolher quais scopes (do catálogo em `auth/scopes.py`) cada um concede.
+
+Sessão do `/admin` é independente da sessão do `/docs-login` e do token JWT usado pelos clientes da API — são três mecanismos de autenticação separados, cada um com seu próprio cookie/segredo.

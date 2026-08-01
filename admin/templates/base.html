@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{% block title %}Astória API{% endblock %} &middot; Admin</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+  header {
+    background: #0f172a;
+    color: #fff;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header .brand { font-weight: 700; }
+  nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-right: 16px;
+    font-size: 0.9rem;
+  }
+  nav a:hover { color: #fff; }
+  header form { display: inline; }
+  header button.logout {
+    background: none;
+    border: 1px solid #475569;
+    color: #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  header button.logout:hover { color: #fff; border-color: #94a3b8; }
+  main { max-width: 960px; margin: 32px auto; padding: 0 24px; }
+  h1 { font-size: 1.4rem; margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+  th { background: #f8fafc; font-weight: 600; color: #475569; }
+  tr:last-child td { border-bottom: none; }
+  .badge { display: inline-block; background: #e2e8f0; color: #334155; border-radius: 999px; padding: 2px 10px; font-size: 0.75rem; margin: 2px 4px 2px 0; }
+  .badge.active { background: #dcfce7; color: #166534; }
+  .badge.blocked { background: #fee2e2; color: #991b1b; }
+  .actions a, .actions button { font-size: 0.85rem; margin-right: 10px; color: #2563eb; text-decoration: none; background: none; border: none; cursor: pointer; padding: 0; font-family: inherit; }
+  .actions button.danger { color: #dc2626; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .btn { display: inline-block; background: #0f172a; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; }
+  .btn:hover { background: #1e293b; }
+  form.card { background: #fff; border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); max-width: 480px; }
+  label { display: block; font-size: 0.8rem; font-weight: 600; color: #334155; margin: 14px 0 6px; }
+  label:first-of-type { margin-top: 0; }
+  input[type=text], input[type=email], input[type=password] {
+    width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem;
+  }
+  .checkbox-list label, .inline-checkbox {
+    display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 0.9rem; color: #0f172a; margin: 6px 0;
+  }
+  .checkbox-list input, .inline-checkbox input { width: auto; }
+  .hint { font-size: 0.8rem; color: #64748b; margin-top: -2px; margin-bottom: 6px; }
+  .error { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; font-size: 0.85rem; padding: 10px 12px; border-radius: 8px; margin-bottom: 16px; }
+  .form-actions { margin-top: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Astória API &middot; Admin</div>
+  <nav>
+    <a href="/admin/users">Usuários</a>
+    <a href="/admin/roles">Papéis</a>
+  </nav>
+  <form method="post" action="/admin/logout">
+    <button class="logout" type="submit">Sair</button>
+  </form>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

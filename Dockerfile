@@ -15,6 +15,7 @@ RUN uv sync --frozen --no-install-project --no-dev
 # Código da aplicação (apenas o necessário para os routers ativos em main.py)
 COPY main.py ./
 COPY auth ./auth
+COPY admin ./admin
 COPY classes ./classes
 COPY routers ./routers
 COPY queries ./queries

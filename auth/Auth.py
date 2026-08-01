@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 
 from auth.database import get_session
 from auth.models.user import UserDB
+from auth.scopes import AVAILABLE_SCOPES
 
 load_dotenv()
 
@@ -52,13 +53,7 @@ DUMMY_HASH = password_hash.hash("dummypassword")
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="/Auth/token",
-    scopes={
-        "estoque:read": "Permissão para visualizar dados de estoque",
-        "prestador:read": "Permissão para consultar prestador",
-        "carregamentos:read": "Permissão para consultar carregamentos",
-        "carregamento:read": "Permissão para consultar carregamento",
-        "admin": "Permissão de administrador",
-    }
+    scopes=AVAILABLE_SCOPES,
 )
 
 # router = APIRouter(prefix="/Auth", tags=["Auth"])
@@ -78,7 +73,8 @@ def get_password_hash(password):
 def get_user(session: Session, username: str):
     user_db = session.exec(select(UserDB).where(UserDB.username == username)).first()
     if user_db:
-        return UserInDB(**user_db.model_dump())
+        effective_scopes = sorted({scope for role in user_db.roles for scope in role.scopes})
+        return UserInDB(**user_db.model_dump(), scopes=effective_scopes)
 
 
 def authenticate_user(session: Session, username: str, password: str):
@@ -123,10 +119,13 @@ async def get_current_user(
         raise credentials_exception
 
     user = get_user(session, username=token_data.username)
-    
+
     if user is None:
         raise credentials_exception
-    
+
+    if user.disabled:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuário bloqueado")
+
     for scope in security_scopes.scopes:
         if scope not in user.scopes:
             raise HTTPException(
@@ -141,8 +140,7 @@ async def get_current_user(
 async def get_current_active_user(
     current_user: Annotated[User, Depends(get_current_user)],
 ):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
+    # get_current_user ja rejeita usuarios com disabled=True
     return current_user
 
 
@@ -156,6 +154,12 @@ async def login_for_access_token(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    if user.disabled:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Usuário bloqueado",
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)

@@ -9,6 +9,8 @@ from fastapi.responses import RedirectResponse
 from auth import Auth
 from auth.docs_auth import require_docs_session
 from auth.docs_auth import router as docs_auth_router
+# Admin
+from admin.router import router as admin_router
 # Rotas
 from routers import (
     queries,
@@ -41,6 +43,7 @@ app = FastAPI(
 )
 
 app.include_router(docs_auth_router)
+app.include_router(admin_router)
 
 
 @app.get("/docs", include_in_schema=False, dependencies=[Depends(require_docs_session)])

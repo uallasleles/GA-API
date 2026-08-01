@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ "Editar usuário" if user else "Novo usuário" }}</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form class="card" method="post" action="{{ ('/admin/users/' ~ user.id ~ '/edit') if user else '/admin/users/new' }}">
+  {% if not user %}
+  <label for="username">Login</label>
+  <input id="username" name="username" type="text" required autofocus>
+  {% endif %}
+  <label for="full_name">Nome completo</label>
+  <input id="full_name" name="full_name" type="text" value="{{ user.full_name if user else '' }}">
+  <label for="email">E-mail</label>
+  <input id="email" name="email" type="email" value="{{ user.email if user else '' }}">
+  <label for="password">Senha{{ " (deixe em branco para manter a atual)" if user else "" }}</label>
+  <input id="password" name="password" type="password" {{ "required" if not user else "" }}>
+  <label>Papéis</label>
+  <div class="checkbox-list">
+    {% for role in roles %}
+    <label><input type="checkbox" name="role_ids" value="{{ role.id }}" {{ "checked" if role.id in selected_role_ids else "" }}> {{ role.name }}</label>
+    {% else %}
+    <p class="hint">Nenhum papel cadastrado ainda — <a href="/admin/roles/new">crie um primeiro</a>.</p>
+    {% endfor %}
+  </div>
+  <label class="inline-checkbox" style="margin-top:16px;">
+    <input type="checkbox" name="active" {{ "checked" if (not user) or (user and not user.disabled) else "" }}>
+    Usuário ativo
+  </label>
+  <div class="form-actions">
+    <button class="btn" type="submit">Salvar</button>
+  </div>
+</form>
+{% endblock %}
