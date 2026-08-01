@@ -69,10 +69,16 @@ Ver [.env.example](.env.example) para a lista completa. Resumo:
 | `LOGGER_API_URL`, `LOGGER_API_KEY` | API de logging externa |
 | `JWT_SECRET_KEY` | Chave de assinatura dos tokens JWT — gerar com `openssl rand -hex 32` |
 | `MYAPI_ACCESS_TOKEN_EXPIRE_MINUTES` | Expiração do token de acesso, em minutos |
+| `DOCS_USERNAME`, `DOCS_PASSWORD` | Credenciais de acesso à página de login de `/docs` e `/openapi.json` |
+| `DOCS_SESSION_SECRET` | Chave de assinatura do cookie de sessão do login de `/docs` — gerar com `openssl rand -hex 32` |
 | `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Credenciais do Postgres da aplicação (usuários) |
 | `DATABASE_URL` | Montada automaticamente no `docker-compose.yml` a partir das variáveis `POSTGRES_*` |
 
 > `ORACLE_HOME`, `LD_LIBRARY_PATH`, `ORACLEDB_INSTANT_CLIENT_DIR` e as variáveis `DCN_*` não são usadas por este serviço (só por processos separados de listener/worker que não fazem parte desta imagem).
+
+## Documentação (/docs)
+
+`/docs` e `/openapi.json` ficam atrás de uma tela de login própria (`/docs-login`) — cookie de sessão assinado, válido por 8h, credenciais fixas em `DOCS_USERNAME`/`DOCS_PASSWORD` (não tem relação com os usuários do Postgres nem com o fluxo de token via `/Auth/token`, que continua público e sem essa proteção). Ver [auth/docs_auth.py](auth/docs_auth.py).
 
 ## Usuários
 
