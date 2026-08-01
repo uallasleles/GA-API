@@ -2,7 +2,7 @@ import logging
 from dotenv import load_dotenv
 # FastAPI
 from fastapi import Depends, FastAPI
-from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import RedirectResponse
 # Autenticacao
@@ -49,6 +49,11 @@ app.include_router(admin_router)
 @app.get("/docs", include_in_schema=False, dependencies=[Depends(require_docs_session)])
 async def swagger_ui():
     return get_swagger_ui_html(openapi_url="/openapi.json", title=f"{app.title} - Docs")
+
+
+@app.get("/redoc", include_in_schema=False, dependencies=[Depends(require_docs_session)])
+async def redoc_ui():
+    return get_redoc_html(openapi_url="/openapi.json", title=f"{app.title} - ReDoc")
 
 
 @app.get("/openapi.json", include_in_schema=False, dependencies=[Depends(require_docs_session)])
