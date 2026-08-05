@@ -1,4 +1,5 @@
 import io
+from datetime import datetime
 import pandas as pd
 from typing import Any, Dict, List
 from fastapi import APIRouter, Security, HTTPException, status, Query, Body
@@ -76,8 +77,21 @@ def export_risco_zero(
     query = load_query(sql)
     dados = queryAll2_Execute(query, bind_variables)
 
-    # 2. Converte para DataFrame do pandas
-    return download_tabela(dados, filename="export_risco_zero")
+    cnpj = _extract_column(dados, "cnpjparceiro") or "sem-cnpj"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    return download_tabela(dados, filename=f"{cnpj}_{timestamp}")
+
+
+def _extract_column(dados, column_name):
+    """Pega o valor de uma coluna na primeira linha, sem depender da caixa (Oracle costuma retornar em maiúsculas)."""
+    if not dados:
+        return None
+    primeira_linha = dados[0]
+    return next(
+        (valor for chave, valor in primeira_linha.items() if chave.lower() == column_name.lower()),
+        None,
+    )
 
 
 # @router.get("/download-tabela")
