@@ -1,5 +1,5 @@
 import io
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import pandas as pd
 from typing import Any, Dict, List
 from fastapi import APIRouter, Security, HTTPException, status, Query, Body
@@ -9,9 +9,11 @@ from classes.db_queries import load_query, queryAll2_Execute
 from auth.Auth import User, get_current_user
 
 router = APIRouter(
-    prefix="/Financeiro", 
+    prefix="/Financeiro",
     tags=["Financeiro"]
 )
+
+BRASILIA_TZ = timezone(timedelta(hours=-3))
 
 
 @router.get("/1203-extrato-cliente")
@@ -78,7 +80,7 @@ def export_risco_zero(
     dados = queryAll2_Execute(query, bind_variables)
 
     cnpj = _extract_column(dados, "cnpjparceiro") or "sem-cnpj"
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(BRASILIA_TZ).strftime("%Y%m%d_%H%M%S")
 
     return download_tabela(dados, filename=f"{cnpj}_{timestamp}")
 
