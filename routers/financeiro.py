@@ -1,7 +1,7 @@
 import io
 from datetime import datetime, timedelta, timezone
 import pandas as pd
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Literal
 from fastapi import APIRouter, Security, HTTPException, status, Query, Body
 from fastapi.responses import StreamingResponse
 from classes.Logger import Logger as AppLogger
@@ -67,6 +67,7 @@ def export_risco_zero(
     CODFILIAL = None,
     DTEMISSAO_INICIAL: str = None,
     DTEMISSAO_FINAL: str = None,
+    formato: Literal["xlsx", "csv"] = Query("xlsx", description="Formato do arquivo exportado"),
     ):
     """Exemplo de Cliente: 118018"""
 
@@ -82,7 +83,7 @@ def export_risco_zero(
     cnpj = _extract_column(dados, "cnpjparceiro") or "sem-cnpj"
     timestamp = datetime.now(BRASILIA_TZ).strftime("%Y%m%d_%H%M%S")
 
-    return download_tabela(dados, filename=f"{cnpj}_{timestamp}")
+    return download_tabela(dados, filename=f"{cnpj}_{timestamp}", formato=formato)
 
 
 def _extract_column(dados, column_name):
@@ -97,29 +98,35 @@ def _extract_column(dados, column_name):
 
 
 # @router.get("/download-tabela")
-def download_tabela(dados, filename="tabela_dados"):
+def download_tabela(dados, filename="tabela_dados", formato: Literal["xlsx", "csv"] = "xlsx"):
     """Em teste!"""
     # 1. Dados que você quer colocar na tabela
     # dados = [
     #     {"id": 1, "nome": "Ana", "cargo": "Engenheira"},
     #     {"id": 2, "nome": "Bruno", "cargo": "Desenvolvedor"},
     # ]
-    
+
     # 2. Converte para DataFrame do pandas
     df = pd.DataFrame(dados)
-    
-    # 3. Escreve o DataFrame em um buffer em memória (Excel)
+
+    # 3. Escreve o DataFrame em um buffer em memória
     buffer = io.BytesIO()
-    with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-        df.to_excel(writer, index=False, sheet_name="Dados")
+    if formato == "csv":
+        # separador ";" e BOM utf-8 para abrir corretamente no Excel em português
+        buffer.write(df.to_csv(index=False, sep=";").encode("utf-8-sig"))
+        media_type = "text/csv"
+    else:
+        with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+            df.to_excel(writer, index=False, sheet_name="Dados")
+        media_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     buffer.seek(0)
-    
+
     # 4. Retorna o arquivo com o cabeçalho para download
-    nome_arquivo = f"{filename}.xlsx"
+    nome_arquivo = f"{filename}.{formato}"
     headers = {"Content-Disposition": f'attachment; filename="{nome_arquivo}"'}
-    
+
     return StreamingResponse(
         buffer,
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        media_type=media_type,
         headers=headers
     )
