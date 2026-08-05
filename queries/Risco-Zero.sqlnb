@@ -40,7 +40,7 @@ cells:
       \                  que já documentamos juntos; VALOR e NUMDOCUMENTO eu
       supus\r
 
-      \                  como PCPREST.VALOR e PCPREST.DUPLIC — não vieram na\r
+      \                  como prest.VALOR e prest.DUPLIC — não vieram na\r
 
       \                  listagem de colunas que você me mandou (o script
       estava\r
@@ -57,59 +57,959 @@ cells:
 
       SELECT\r
 
-      \      fl.CGC                               \t\tAS cnpjparceiro    -- CNPJ
-      do Grupo Astoria (fixo/bind, não vem do banco)\r
+      \      REGEXP_REPLACE(filial.CGC, '[^0-9]', '')     AS cnpjparceiro     --
+      CNPJ da Filial do Grupo Astoria\r
 
-      \    , TRIM(cli.CGCENT)                          AS cnpj            --
+      \    , REGEXP_REPLACE(client.CGCENT, '[^0-9]', '')  AS cnpj             --
       CNPJ (PJ) ou CPF (PF) do cliente na Receita Federal\r
 
-      \    , TRIM(cli.TELENT)                          AS telefone        --
+      \    , REGEXP_REPLACE(client.TELENT, '[^0-9]', '')  AS telefone         --
       Telefone principal de contato do cliente\r
 
-      \    , TO_CHAR(pr.DTEMISSAO, 'YYYY-MM-DD')       AS dtalancto       --
+      \    , TO_CHAR(prest.DTEMISSAO, 'YYYY-MM-DD')       AS dtalancto        --
       Data de lançamento da compra/título no sistema\r
 
-      \    , TRIM(pr.DUPLIC)                           AS numdocumento    --
+      \    , TRIM(prest.DUPLIC)                           AS numdocumento     --
       Número do documento de registro no sistema\r
 
-      \    , pr.VALOR                                  AS valor           --
+      \    , prest.VALOR                                  AS valor            --
       Valor do título (compras parceladas: uma linha por parcela)\r
 
-      \    , TO_CHAR(pr.DTBAIXA, 'YYYY-MM-DD')         AS dtacompensacao  --
+      \    , TO_CHAR(prest.DTBAIXA, 'YYYY-MM-DD')         AS dtacompensacao   --
       Data em que foi efetuado o pagamento do título\r
 
-      \    , TO_CHAR(pr.DTVENC, 'YYYY-MM-DD')          AS dtavencimento   --
+      \    , TO_CHAR(prest.DTVENC, 'YYYY-MM-DD')          AS dtavencimento    --
       Data de início de contagem para vencimento do título\r
+
+      \t\r
 
       FROM\r
 
-      \    PCPREST pr\r
+      \    PCPREST prest\r
 
-      \    INNER JOIN PCCLIENT cli\r
+      \    INNER JOIN PCCLIENT client\r
 
-      \        ON cli.CODCLI = pr.CODCLI\r
+      \        ON client.CODCLI = prest.CODCLI\r
 
-      \tINNER JOIN PCFILIAL fl \r
+      \tINNER JOIN PCFILIAL filial \r
 
-      \t\tON pr.CODFILIAL = fl.CODIGO\r
+      \t\tON prest.CODFILIAL = filial.CODIGO\r
 
-      WHERE\r
+      \r
 
-      \    pr.CODFILIAL = :codfilial                     -- filtra a(s)
-      filial(is) que farão parte do envio\r
+      WHERE 1=1\r
 
-      \    AND pr.DTEMISSAO >= :dtinicio                 -- janela de extração
-      (incremental) - ex: última data já exportada\r
+      \    AND prest.CODFILIAL = NVL(:CODFILIAL, prest.CODFILIAL)           \t--
+      filtra a(s) filial(is) que farão parte do envio\r
 
-      \    AND pr.DTEMISSAO < :dtfim\r
+      \    AND prest.DTEMISSAO >= TO_DATE(:DTEMISSAO_INICIAL, 'DD/MM/YYYY') \t--
+      janela de extração (incremental) - ex: última data já exportada\r
 
-      \    AND pr.CANCELDESD IS NULL                     -- exclui títulos com
-      desdobramento cancelado\r
+      \    AND prest.DTEMISSAO <= TO_DATE(:DTEMISSAO_FINAL,   'DD/MM/YYYY')  \r
 
-      ORDER BY\r
+      \    AND prest.CANCELDESD IS NULL                                     \t--
+      exclui títulos com desdobramento cancelado\r
 
-      \    pr.DTEMISSAO;"
+      \    AND prest.CODCOB NOT IN ('DEVT', 'BNF', 'CAN')    \t\t\t\t\t-- Exclui
+      devoluções, bonificações e cancelados\r
+
+      \    AND prest.VALOR > 0                               \t\t\t\t\t--
+      Garante apenas títulos com valor a receber\r
+
+      \    -- AND prest.DTPAG IS NULL                        \t\t\t\t\t-- Apenas
+      títulos não baixados\r
+
+      \r
+
+      ORDER BY \r
+
+      \    prest.DTEMISSAO"
     languageId: oracle-sql
   - kind: 2
-    value: select * from pcfilial
+    value: "SELECT\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       1. IDENTIFICAÇÃO DO TÍTULO / CHAVES / DOCUMENTOS VINCULADOS\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \      prest.CODFILIAL                 -- Filial do título\r
+
+      \    , prest.DUPLIC                    -- Número da duplicata\r
+
+      \    , prest.PREST                     -- Identificador/sequencial da
+      prestação (chave da tabela)\r
+
+      \    , prest.DTCRIACAO                 -- Data de criação da parcela\r
+
+      \t-- ________________________________\r
+
+      \t, prest.NUMCAR                    -- Número de carregamento/carga
+      vinculado ao título\r
+
+      \t-- ________________________________\r
+
+      \    , prest.NUMTRANS                  -- Número de transação\r
+
+      \    , prest.NUMTRANSVENDA             -- Número de transação de venda
+      vinculada\r
+
+      \t-- ________________________________\r
+
+      \    , prest.NUMPED                    -- Número do pedido\r
+
+      \    -- ________________________________\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       3. COBRANÇA / CARTEIRA / STATUS E TIPO DO TÍTULO\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CODCOB                    -- Código da cobrança/carteira\r
+
+      \    , prest.CODCOBBANCO               -- Código da cobrança bancária\r
+
+      \    , prest.CODCOBORIG                -- Código da cobrança de origem\r
+
+      \    , prest.CODCOBPOS                 -- Cobrança das parcelas a
+      desdobrar, referente à venda POS (Auto-Serviço); informado na rotina 409 -
+      Acerto Checkout\r
+
+      \    , prest.CODCOBRADOR               -- Código do cobrador\r
+
+      \    , prest.CODCOBSEFAZ               -- Código de cobrança da SEFAZ\r
+
+      \    , prest.CODSTATUSCOB              -- Situação da cobrança do título\r
+
+      \    , prest.CODAGENTECOBRANCA         -- Código do agente de cobrança\r
+
+      \    , prest.DTDEFAGENTE               -- Data de transferência de
+      agente\r
+
+      \    , prest.DTREGCARTEIRA             -- Data de registro da carteira\r
+
+      \    , prest.CODOCORRBAIXA             -- Código de ocorrência de baixa
+      (motivo/tipo)\r
+
+      \    , prest.ANTECIPADO                -- Indicador de título antecipado
+      (recebimento antecipado)\r
+
+      \    , prest.STATUS                    -- Status de crédito do título\r
+
+      \    , prest.STATUSSCI                 -- Status do título referente à
+      rotina 1271\r
+
+      \    , prest.TIPO                      -- Tipo do título\r
+
+      \    , prest.TIPOPREST                 -- Tipo do lançamento (C - Conta |
+      B - Caixa/Banco)\r
+
+      \    , prest.TIPOESTORNO               -- Tipo de estorno\r
+
+      \    , prest.PERMITEESTORNO            -- Indica se será permitido
+      estornar o título\r
+
+      \    , prest.OPERACAO                  -- Operação relacionada ao título\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       4. BANCO / BOLETO / REMESSA CNAB / CUSTÓDIA\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CODBANCO                   -- Código do banco\r
+
+      \    , prest.CODBANCOBAIXA              -- Código do banco em que o caixa
+      foi acertado\r
+
+      \    , prest.CODBANCOCM                 -- Código do banco da cobrança
+      magnética\r
+
+      \    , prest.CODBANCOCM2                -- Código do banco da cobrança
+      magnética (banco secundário)\r
+
+      \    , prest.CODBANCOCUSTODIA           -- Código do banco de custódia\r
+
+      \    , prest.CODBCOCUSTODIA             -- Código do banco de custódia\r
+
+      \    , prest.CODPORTADOR                -- Código do portador do título\r
+
+      \    , prest.TIPOPORTADOR               -- Tipo do portador\r
+
+      \    , prest.CODFUNCBORDERO             -- Funcionário responsável pelo
+      borderô\r
+
+      \    , prest.NUMAGENCIA                 -- Número da agência bancária\r
+
+      \    , prest.DVAGENCIA                  -- Dígito verificador da agência\r
+
+      \    , prest.DVCOB                      -- Dígito verificador da
+      cobrança\r
+
+      \    , prest.DVCONTA                    -- Dígito verificador da conta\r
+
+      \    , prest.NUMCONTACORRENTE           -- Número da conta corrente\r
+
+      \    , prest.CODBLOCO                   -- Código do bloco de
+      talão/boleto\r
+
+      \    , prest.CODBARRA                   -- Código de barras do boleto\r
+
+      \    , prest.CODBARRA2                  -- Código de barras do banco
+      secundário\r
+
+      \    , prest.LINHADIG                   -- Linha digitável do boleto\r
+
+      \    , prest.LINHADIG2                  -- Linha digitável do banco
+      secundário\r
+
+      \    , prest.NOSSONUMBCO                -- Nosso número (banco)\r
+
+      \    , prest.NOSSONUMBCO2               -- Nosso número do banco
+      secundário\r
+
+      \    , prest.NUMBANCO                   -- Número do banco\r
+
+      \    , prest.NUMBORDERO                 -- Número do borderô\r
+
+      \    , prest.DTBORDER                   -- Data do borderô\r
+
+      \    , prest.DTBORDERO                  -- Data do borderô (registro
+      complementar)\r
+
+      \    , prest.NUMREMESSA                 -- Número da remessa enviada ao
+      banco\r
+
+      \    , prest.NUMSEQRETORNO              -- Número da posição do título no
+      arquivo de retorno\r
+
+      \    , prest.ARQRETORNO                 -- Nome do arquivo de retorno\r
+
+      \    , prest.NOMEARQUIVO                -- Nome do arquivo (com extensão)
+      de remessa/retorno\r
+
+      \    , prest.DTPROCESSAMENTO            -- Data de processamento do
+      arquivo de remessa/retorno\r
+
+      \    , prest.COMPENSACAOBCO             -- Indicador de compensação
+      bancária\r
+
+      \    , prest.DTDESCONTOTITBCO           -- Data de desconto do título no
+      banco\r
+
+      \    , prest.DTCUSTODIA                 -- Data de custódia\r
+
+      \    , prest.NUMCUSTODIA                -- Número de custódia\r
+
+      \    , prest.NUMLOTECUSTODIA            -- Número do lote de custódia\r
+
+      \    , prest.OBSCUSTODIA                -- Observação de custódia\r
+
+      \    , prest.DTCONCIL                   -- Data e hora de conciliação dos
+      títulos\r
+
+      \    , prest.DTCONCILVENC               -- Data de conciliação do
+      vencimento\r
+
+      \    , prest.CODFUNCCONCIL              -- Código do funcionário que
+      realizou a conciliação dos títulos\r
+
+      \    , prest.CODFUNCCONCILVENC          -- Código do funcionário que
+      realizou a conciliação de vencimento\r
+
+      \    , prest.DTIMPRESSAO                -- Data de impressão do boleto\r
+
+      \    , prest.EQUIPLANC                  -- Equipamento de lançamento que
+      alterou o registro\r
+
+      \    , prest.FUNCLANC                   -- Funcionário logado que alterou
+      o registro\r
+
+      \    , prest.BOLETO                     -- Indicador/dado do boleto\r
+
+      \    , prest.ORIGEMBOLETO               -- Origem da geração do boleto
+      bancário (padrão do campo é nulo)\r
+
+      \    , prest.PASTAARQUIVOBOLETO         -- Diretório (caminho completo)
+      onde é gerado o arquivo PDF do boleto\r
+
+      \    , prest.SOMATXBOLETO               -- Indica se deve somar a tarifa
+      ao valor do boleto\r
+
+      \    , prest.VLTXBOLETO                 -- Valor da tarifa do boleto\r
+
+      \    , prest.VLTXIOF                    -- Valor da taxa de IOF\r
+
+      \    , prest.VLTXIOFCOMPLEMENTAR        -- Valor da taxa de IOF
+      complementar\r
+
+      \    , prest.VLRDESPBANCARIAS           -- Valor de despesas bancárias\r
+
+      \    , prest.TIPOCORBAN                 -- Layout do correspondente
+      bancário\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       5. CHEQUE\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CHEQUETERCEIRO             -- Indica se é cheque de terceiro
+      ou próprio\r
+
+      \    , prest.CGCCPFCH                   -- CNPJ/CPF do emitente do
+      cheque\r
+
+      \    , prest.DVCHEQUE                   -- Dígito verificador do cheque\r
+
+      \    , prest.NUMCHEQUE                  -- Número do cheque\r
+
+      \    , prest.NUMPROTOCOLOCHQ            -- Número de protocolo da consulta
+      de cheque\r
+
+      \    , prest.DTLANCCH                   -- Data de lançamento do cheque\r
+
+      \    , prest.DTDESCONTADO               -- Data em que o cheque foi
+      descontado\r
+
+      \    , prest.DTDESC                     -- Data de desconto (campo
+      histórico — nota de versão 16.0.5.22 no dicionário original)\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       6. CARTÃO DE CRÉDITO/DÉBITO — TEF / POS\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.BANDEIRACARTAO             -- Bandeira do cartão de crédito
+      ou débito\r
+
+      \    , prest.CNPJCREDENCCARTAO          -- CNPJ da operadora de cartão\r
+
+      \    , prest.CODADMCARTAO               -- Código da administradora que
+      efetuou a transação\r
+
+      \    , prest.CODBANDEIRATEF             -- Código da bandeira do cartão
+      TEF\r
+
+      \    , prest.CODBAIXACARTAOREDE         -- Código de importação do arquivo
+      de crédito REDE\r
+
+      \    , prest.CODAUTORICREDTEF           -- Código de autorização de
+      crédito TEF\r
+
+      \    , prest.CODAUTORIZACAOTEF          -- Código de autorização da venda
+      TEF\r
+
+      \    , prest.CODAUTORIZACAOTEF1         -- Código de autorização TEF
+      (versão VARCHAR, para retorno alfanumérico)\r
+
+      \    , prest.CODAUTTEF                  -- Código de autorização TEF\r
+
+      \    , prest.CODINSTDOACAOTEF           -- Código da instituição de
+      caridade (rotina 2070) para doação de troco via TEF\r
+
+      \    , prest.CORRESPONDENTE             -- Identifica de que forma foi
+      realizada a transação de cartão, TEF ou POS\r
+
+      \    , prest.NSUHOST                    -- Número do NSU Host da transação
+      de cartão\r
+
+      \    , prest.NSUTEF                     -- Número de controle vinculado ao
+      cartão (TEF); gravado na rotina 2075 ao emitir venda TEF DLL\r
+
+      \    , prest.DTTRANSACAOCC              -- Data de transação do cartão de
+      crédito\r
+
+      \    , prest.CODCRED                    -- Código do crédito utilizado no
+      pagamento\r
+
+      \    , prest.NUMCARTAO                  -- Número do cartão\r
+
+      \    , prest.NUMCARTAOCRM               -- Número do cartão CRM\r
+
+      \    , prest.NUMLOTECARTAOTEF           -- Número do lote gerado para
+      conciliação de cartões\r
+
+      \    , prest.NUMRESUMO                  -- Número do resumo da operadora
+      de cartão\r
+
+      \    , prest.PARCELAMENTOTEF            -- Indica se os títulos foram
+      gravados de acordo com o parcelamento da transação TEF\r
+
+      \    , prest.PRESTTEF                   -- Número da parcela original\r
+
+      \    , prest.QTPARCELASPOS              -- Quantidade de parcelas a
+      desdobrar, referente à venda POS (Auto-Serviço); informado na rotina 409 -
+      Acerto Checkout\r
+
+      \    , prest.TIPOOPERACAOTEF            -- Tipo de operação de cartão
+      TEF\r
+
+      \    , prest.PDV                        -- Número do PDV da operadora de
+      cartão\r
+
+      \    , prest.SERIALPOS                  -- Código do serial do equipamento
+      POS\r
+
+      \    , prest.RAZAOCREDENCCARTAO         -- Razão social da credenciadora
+      do cartão\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       7. PIX / CARTEIRA DIGITAL / PAGAMENTO DIGITAL / TROCO\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.BAIXADOVIAPIX              -- Indica se a baixa foi realizada
+      via PIX\r
+
+      \    , prest.EMVPIX                     -- Payload EMV do PIX (QR Code)\r
+
+      \    , prest.TXIDPIX                    -- Identificador da transação PIX
+      (txid)\r
+
+      \    , prest.URLPIX                     -- URL de pagamento PIX\r
+
+      \    , prest.CARTEIRADIGITAL            -- Carteira digital\r
+
+      \    , prest.NOMECARTEIRADIGITAL        -- Nome da carteira digital\r
+
+      \    , prest.IDPAGAMENTO                -- Código do ID do pagamento
+      gerado\r
+
+      \    , prest.IDPAGAMENTOLOCAL           -- Código do ID do pagamento
+      gerado quando não há internet\r
+
+      \    , prest.IDRESPFISCAL               -- Código do ID da resposta fiscal
+      gerada\r
+
+      \    , prest.IDTERMPAG                  -- ID do terminal de pagamento\r
+
+      \    , prest.NSUPAGDIGITAL              -- NSU da transação de pagamento
+      digital\r
+
+      \    , prest.NUMTRANSPAGDIGITAL         -- Número identificador da
+      transação de pagamento digital\r
+
+      \    , prest.PROCESSADORTRANSPAGDIGITAL -- ID de processamento da
+      transação de pagamento digital\r
+
+      \    , prest.HUBNUMCAIXAPADRAO          -- Caixa padrão para pagamento
+      digital\r
+
+      \    , prest.VALORCOMTROCO              -- Valor destinado ao troco
+      relacionado à venda\r
+
+      \    , prest.VLTROCO                    -- Valor do troco para aquela
+      cobrança\r
+
+      \    , prest.VLDOACAOINSTAJUDATEF       -- Valor da doação de troco via
+      TEF para instituição de ajuda\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       8. DATAS DE EMISSÃO / VENCIMENTO / PRORROGAÇÃO\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.DTEMISSAO                  -- Data de emissão do título\r
+
+      \    , prest.DTEMISSAOORIG              -- Data de emissão original do
+      título, gravada no desdobramento do Acerto de Checkout (rotina 409)\r
+
+      \    , prest.DTVENC                     -- Data de vencimento\r
+
+      \    , prest.DTVENCORIG                 -- Data de vencimento original\r
+
+      \    , prest.DTVENCANTERIOR             -- Data de vencimento (original)
+      que foi prorrogada na rotina 1231\r
+
+      \    , prest.CODFUNCPRORROG             -- Código do funcionário que
+      prorrogou o título, na rotina 1231\r
+
+      \    , prest.DTLANCPRORROG              -- Data de lançamento da
+      prorrogação\r
+
+      \    , prest.TIPOPRORROG                -- Tipo de prorrogação\r
+
+      \    , prest.DTRECEBIMENTOPREVISTO      -- Data de recebimento previsto\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       9. BAIXA / PAGAMENTO / ESTORNO\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.BAIXACONCILIADA            -- Indica se o título foi baixado
+      com um lançamento DNI\r
+
+      \    , prest.CODBAIXA                   -- Código da baixa\r
+
+      \    , prest.DTBAIXA                    -- Data da baixa\r
+
+      \    , prest.DTBAIXACRED                -- Data e hora da baixa do
+      crédito\r
+
+      \    , prest.DATAHORAMINUTOBAIXA        -- Data, com hora e minuto, da
+      baixa manual de títulos (rotina 1207)\r
+
+      \    , prest.DTPAG                      -- Data de pagamento\r
+
+      \    , prest.VPAGO                      -- Valor pago\r
+
+      \    , prest.CODFUNCCXMOT               -- Funcionário responsável pelo
+      acerto do caixa/motorista\r
+
+      \    , prest.DTCXMOT                    -- Data do acerto de
+      caixa/motorista\r
+
+      \    , prest.DTCXMOTHHMMSS              -- Data/hora/minuto/segundo do
+      acerto do título\r
+
+      \    , prest.DTMOVIMENTOCX              -- Data da movimentação do caixa\r
+
+      \    , prest.DTESTORNO                  -- Data do estorno\r
+
+      \    , prest.HORAESTORNO                -- Hora do estorno\r
+
+      \    , prest.MINUTOESTORNO              -- Minuto do estorno\r
+
+      \    , prest.CODFUNCESTORNO             -- Funcionário que realizou o
+      estorno\r
+
+      \    , prest.DTULTESTORNO               -- Data do último estorno\r
+
+      \    , prest.DTINCLUSAOMANUAL           -- Data e hora da baixa do crédito
+      lançada manualmente\r
+
+      \    , prest.NUMTRANSBAIXA              -- Id para controle de baixa\r
+
+      \    , prest.VLRDIFBAIXA                -- Diferença entre o valor
+      calculado do título a receber e o valor pago, para a API do BolePix\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       10. DESDOBRAMENTO / FECHAMENTO / ALTERAÇÃO DO REGISTRO / ROTINAS
+      DE ORIGEM\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.DTDESD                     -- Data de desdobramento\r
+
+      \    , prest.HORADESD                   -- Hora do desdobramento\r
+
+      \    , prest.MINUTODESD                 -- Minuto do desdobramento\r
+
+      \    , prest.CODFUNCDESD                -- Funcionário responsável pelo
+      desdobramento\r
+
+      \    , prest.CODFUNCDESD1               -- Funcionário responsável pelo
+      desdobramento (registro adicional)\r
+
+      \    , prest.CANCELDESD                 -- Cancelamento de desdobramento\r
+
+      \    , prest.HASH                       -- Hash de validação dos campos do
+      processo de cancelar desdobramento\r
+
+      \    , prest.VERSAOHASH                 -- Versão do algoritmo do campo
+      HASH\r
+
+      \    , prest.HISTORIGDESDOBRAMENTO      -- Histórico de origem do
+      desdobramento do título\r
+
+      \t-- _________________________________\r
+
+      \    , prest.NUMFECHAMENTOMOVCX         -- Número do fechamento da
+      movimentação de caixa\r
+
+      \    , prest.DTFECHA                    -- Data de fechamento\r
+
+      \    , prest.HORAFECHA                  -- Hora de fechamento\r
+
+      \    , prest.MINUTOFECHA                -- Minuto de fechamento\r
+
+      \    , prest.CODFUNCFECHA               -- Funcionário responsável pelo
+      fechamento\r
+
+      \t-- _________________________________\r
+
+      \    , prest.CODFUNCINC                 -- Funcionário responsável pela
+      inclusão do registro\r
+
+      \    , prest.DTINCLUSAO                 -- Data de inclusão do registro\r
+
+      \    , prest.DTMXSALTER                 -- Data máxima de alteração
+      (controle de sincronização)\r
+
+      \    , prest.DTULTALTER                 -- Data da última alteração\r
+
+      \    , prest.CODFUNCULTALTER            -- Funcionário responsável pela
+      última alteração\r
+
+      \t-- _________________________________\r
+
+      \    , prest.ROTDESD                    -- Rotina de desdobramento\r
+
+      \    , prest.ROTINADESD                 -- Rotina que efetuou o
+      desdobramento do título\r
+
+      \    , prest.ROTINAFECHA                -- Rotina que efetuou o fechamento
+      do título\r
+
+      \    , prest.ROTINAINSERT               -- Rotina de inserção do
+      registro\r
+
+      \    , prest.ROTINALANC                 -- Rotina de lançamento do título
+      (306 ou 2075)\r
+
+      \    , prest.ROTINALANCULTALT           -- Última rotina que alterou o
+      registro\r
+
+      \    , prest.ROTINAPAG                  -- Rotina que efetuou o pagamento
+      do título\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       11. LIBERAÇÃO DE ENTREGA / EXPEDIÇÃO\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CODFUNCLIBERACAOENTREGA    -- Funcionário que efetuou a
+      liberação de entrega do pedido na expedição\r
+
+      \    , prest.DTLIBERACAOENTREGA         -- Data de liberação de entrega do
+      pedido na expedição\r
+
+      \    , prest.DTLIBERACAOFECHAMENTO      -- Data de liberação do contas a
+      receber no caixa varejo\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       12. DEVOLUÇÃO / CANCELAMENTO / SAÍDA\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.DTDEVOL                    -- Data de devolução\r
+
+      \    , prest.VLDEVOL                    -- Valor de devolução\r
+
+      \    , prest.NUMTRANSENTDEVCLI          -- Número de transação da
+      devolução do cliente\r
+
+      \    , prest.DTCANCEL                   -- Data de cancelamento\r
+
+      \    , prest.DTSAIDA                    -- Data de saída\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       13. SERASA / PROTESTO / CARTÓRIO / NEGATIVAÇÃO\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.ARQUIVOSERASA              -- Dados do arquivo SERASA gerado
+      para o título\r
+
+      \    , prest.DTENVIOSERASA              -- Data de envio para o Serasa\r
+
+      \    , prest.DTENVIOSERASASIMPLES       -- Data de envio para o Serasa no
+      arquivo SIMPLES\r
+
+      \    , prest.DTRETIRADASERASA           -- Data em que o lançamento foi
+      enviado para exclusão no Serasa\r
+
+      \    , prest.DTRETIRADASERASASIMPLES    -- Data em que o lançamento foi
+      enviado para exclusão no Serasa (arquivo SIMPLES)\r
+
+      \    , prest.PROTESTO                   -- Indica título em protesto\r
+
+      \    , prest.CARTORIO                   -- Dados de cartório\r
+
+      \    , prest.NUMDIASCARENCIA            -- Número de dias de carência
+      (antes do protesto/negativação)\r
+
+      \    , prest.NUMDIASPRAZOPROTESTO       -- Número de dias de prazo para
+      protesto\r
+
+      \    , prest.VLRDESPCARTORAIS           -- Valor de despesas cartorais\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       14. INTEGRAÇÕES EXTERNAS (VENDOR / QIS / ANTECIPA / CISP)\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CONTRATOVENDOR             -- Contrato Vendor\r
+
+      \    , prest.CONTRATOAR                 -- Contrato de antecipação/AR\r
+
+      \    , prest.CODBANCOVENDOR             -- Código do banco Vendor\r
+
+      \    , prest.NUMTRANSVENDOR             -- Número de transação Vendor\r
+
+      \    , prest.TIPOVENDORDESC             -- Tipo de negociação Vendor(V) ou
+      desconto(D)\r
+
+      \    , prest.TXVENDORBCO                -- Taxa Vendor cobrada pelo
+      banco\r
+
+      \    , prest.TXVENDORCLI                -- Taxa Vendor repassada ao
+      cliente\r
+
+      \    , prest.VLCONTRATOVENDOR           -- Valor do contrato Vendor\r
+
+      \    , prest.VLCUSTODOCVENDOR           -- Valor de custo do documento
+      Vendor\r
+
+      \    , prest.VLTXVENDOR                 -- Valor da taxa Vendor\r
+
+      \    , prest.DTVENDOR                   -- Data de operação Vendor\r
+
+      \    , prest.DTFECHAVENDOR              -- Data de fechamento Vendor\r
+
+      \    , prest.DTREMVENDOR                -- Data de remessa Vendor\r
+
+      \    , prest.ENVIADOQIS                 -- Indica se os valores foram
+      enviados para o sistema QIS\r
+
+      \    , prest.EXPORTADOSERVINT           -- Indicador de exportação para
+      serviço de integração\r
+
+      \    , prest.DTEXPORTACAOSERVINT        -- Data de exportação para serviço
+      de integração\r
+
+      \    , prest.IMPORTADOSERVPRINC         -- Indicador de importação para
+      serviço principal\r
+
+      \    , prest.DTIMPORTACAOSERVPRINC      -- Data de importação para serviço
+      principal\r
+
+      \    , prest.IDANTECIPA                 -- ERP ID do título de origem
+      relacionado à integração com o TOTVS Antecipa\r
+
+      \    , prest.CNPJCISP                   -- CNPJ para CISP\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       15. RÉGUA DE COBRANÇA (SINCRONIZAÇÃO)\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.DT_SINCRONIZACAO_REGUA_ABERTA    -- Data de sincronização da
+      régua de cobrança - título em aberto\r
+
+      \    , prest.DT_SINCRONIZACAO_REGUA_CANC      -- Data de sincronização da
+      régua de cobrança - título cancelado\r
+
+      \    , prest.DT_SINCRONIZACAO_REGUA_CONFIRM   -- Data de sincronização da
+      régua de cobrança - confirmação\r
+
+      \    , prest.DT_SINCRONIZACAO_REGUA_PAGA      -- Data de sincronização da
+      régua de cobrança - título pago\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       16. DNI (DÉBITO/TÍTULO NÃO IDENTIFICADO)\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CODFUNCDNICLI              -- Código do funcionário que
+      realizou a associação de DNI\r
+
+      \    , prest.DTASSOCIADNICLI            -- Data de associação de DNI\r
+
+      \    , prest.NUMASSOCDNI                -- Número de associação de DNI com
+      títulos\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       20. VALORES DO TÍTULO, MULTA, JUROS E ENCARGOS\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.VALOR                      -- Valor do título\r
+
+      \    , prest.VALORORIG                  -- Valor original do título\r
+
+      \    , prest.VALORDESC                  -- Valor de desconto\r
+
+      \    , prest.VALORDESCORIG              -- Valor de desconto original do
+      título\r
+
+      \    , prest.PERDESC                    -- Percentual de desconto\r
+
+      \    , prest.VALORESTORNO               -- Valor estornado do título (será
+      menor ou igual ao valor pago)\r
+
+      \    , prest.VALORMULTA                 -- Valor de multa do título\r
+
+      \    , prest.NUMNEGOCIACAO              -- Número da negociação de compra
+      referente a este contas a receber\r
+
+      \    , prest.TXPERM                     -- Taxa de permanência/juros\r
+
+      \    , prest.TXPERMPREVISTO             -- Juros previsto\r
+
+      \    , prest.TXPERMPREVREAL             -- Juros previsto que o cliente
+      realmente deve\r
+
+      \    , prest.VLRTOTDESPESASEJUROS       -- Valor de outras despesas do
+      título\r
+
+      \    , prest.VLROUTROSACRESC            -- Valor de outros acréscimos\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       21. OBSERVAÇÕES / TEXTO LIVRE\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.OBS                        -- Observação geral\r
+
+      \    , prest.OBS2                       -- Observação complementar\r
+
+      \    , prest.OBSFINANC                  -- Observação financeira\r
+
+      \    , prest.OBSTITULO                  -- Observação do título\r
+
+      \r
+
+      \    /*
+      -------------------------------------------------------------------\r
+
+      \       22. OUTROS CAMPOS DIVERSOS\r
+
+      \       -----------------------------------------------------------------\
+      -- */\r
+
+      \    , prest.CODEPTO                    -- Código do departamento\r
+
+      \    , prest.CODESTABELECIMENTO         -- Código do estabelecimento\r
+
+      \    , prest.CODFUNCCHECKOUT            -- Funcionário responsável pelo
+      checkout (venda POS/Auto-Serviço)\r
+
+      \    , prest.NUMCHECKOUT                -- Número do checkout (venda
+      POS/Auto-Serviço)\r
+
+      \    , prest.DATACONSOLIDACAOPREFAT     -- Data de consolidação do
+      pré-faturamento\r
+
+      \    , prest.VALORENTFUT                -- Valor utilizado para notas
+      fiscais de entrega futura (TV7), no processo Home Center, quando há
+      NFC-e\r
+
+      \r
+
+      FROM\r
+
+      \    PCPREST prest\r
+
+      \    INNER JOIN PCCLIENT client\r
+
+      \        ON client.CODCLI = prest.CODCLI\r
+
+      \tINNER JOIN PCFILIAL filial \r
+
+      \t\tON prest.CODFILIAL = filial.CODIGO\r
+
+      \r
+
+      WHERE 1=1\r
+
+      \    AND prest.CODFILIAL = NVL(:CODFILIAL, prest.CODFILIAL)           --
+      filtra a(s) filial(is) que farão parte do envio\r
+
+      \    AND prest.DTEMISSAO >= TO_DATE(:DTEMISSAO_INICIAL, 'DD/MM/YYYY') --
+      janela de extração (incremental) - ex: última data já exportada\r
+
+      \    AND prest.DTEMISSAO <= TO_DATE(:DTEMISSAO_FINAL,   'DD/MM/YYYY')  \r
+
+      \    AND prest.CANCELDESD IS NULL                                     --
+      exclui títulos com desdobramento cancelado\r
+
+      \r
+
+      \    -- AND prest.DTPAG IS NULL                        -- Apenas títulos
+      não baixados\r
+
+      \    AND prest.CODCOB NOT IN ('DEVT', 'BNF', 'CAN')    -- Exclui
+      devoluções, bonificações e cancelados\r
+
+      \    AND prest.VALOR > 0                               -- Garante apenas
+      títulos com valor a receber\r
+
+      ORDER BY \r
+
+      \    prest.DTEMISSAO;"
     languageId: oracle-sql
