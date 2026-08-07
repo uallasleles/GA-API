@@ -70,7 +70,30 @@ def export_risco_zero(
     DTEMISSAO_FINAL: str = None,
     formato: Literal["xlsx", "csv"] = Query("xlsx", description="Formato do arquivo exportado"),
     ):
-    """Exemplo de Cliente: 118018"""
+    """
+    /* =============================================================================
+    FINALIDADE ..:  Extração de dados de Contas a Receber para exportação ao
+                    BigQuery da Risco Zero (gestão de dados, análise de crédito
+                    e avaliação de risco de inadimplência).
+
+    ORIGEM ......:  WinThor (PCPREST - títulos de cobrança / PCCLIENT - cadastro
+                    de clientes)
+
+    LAYOUT ......:  cnpjparceiro (STRING) | cnpj (STRING) | telefone (STRING)
+                    | dtalancto (DATE) | numdocumento (STRING) | valor (FLOAT)
+                    | dtacompensacao (DATE) | dtavencimento (DATE)
+
+    OBSERVAÇÃO ..:  Ajustei nomes de coluna do PCCLIENT (CGCENT, TELENT) pelo
+                    padrão usual do WinThor — confirme no seu ambiente, pois
+                    pode variar conforme customização/versão (ex.: TELENT1,
+                    TELCOM, FONE). Da PCPREST usei DTEMISSAO, DTVENC e DTBAIXA,
+                    que já documentamos juntos; VALOR e NUMDOCUMENTO eu supus
+                    como prest.VALOR e prest.DUPLIC — não vieram na
+                    listagem de colunas que você me mandou (o script estava
+                    truncado em NUMCAR), então vale conferir se existem mesmo
+                    com esse nome antes de rodar em produção.
+    ============================================================================= */
+    """
 
     sql = "queries/export-risco-zero.sql"
     bind_variables = {
