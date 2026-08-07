@@ -27,7 +27,7 @@ SELECT
     , prest.VALOR                                  AS valor            -- Valor do título (compras parceladas: uma linha por parcela)
     , TO_CHAR(prest.DTBAIXA, 'DD/MM/YYYY')         AS dtacompensacao   -- Data em que foi efetuado o pagamento do título
     , TO_CHAR(prest.DTVENC, 'DD/MM/YYYY')          AS dtavencimento    -- Data de início de contagem para vencimento do título
-	
+	, prest.CODCOB
 FROM
     PCPREST prest
     INNER JOIN PCCLIENT client
@@ -40,8 +40,9 @@ WHERE 1=1
     AND prest.DTEMISSAO >= TO_DATE(:DTEMISSAO_INICIAL, 'DD/MM/YYYY') 	-- janela de extração (incremental) - ex: última data já exportada
     AND prest.DTEMISSAO <= TO_DATE(:DTEMISSAO_FINAL,   'DD/MM/YYYY')  
     AND prest.CANCELDESD IS NULL                                     	-- exclui títulos com desdobramento cancelado
-    AND prest.CODCOB NOT IN ('DEVT', 'BNF', 'CAN')    					-- Exclui devoluções, bonificações e cancelados
+    AND prest.CODCOB NOT IN ('DEVT', 'BNF', 'CAN', 'DESD')    			-- Exclui devoluções, bonificações e cancelados
     AND prest.VALOR > 0                               					-- Garante apenas títulos com valor a receber
+    -- AND prest.DUPLIC = 1225824
     -- AND prest.DTPAG IS NULL                        					-- Apenas títulos não baixados
 
 ORDER BY 
