@@ -1,3 +1,4 @@
+import csv
 import io
 from datetime import datetime, timedelta, timezone
 import pandas as pd
@@ -83,7 +84,13 @@ def export_risco_zero(
     cnpj = _extract_column(dados, "cnpjparceiro") or "sem-cnpj"
     timestamp = datetime.now(BRASILIA_TZ).strftime("%Y%m%d_%H%M%S")
 
-    return download_tabela(dados, filename=f"{cnpj}_{timestamp}", formato=formato)
+    return download_tabela(
+        dados,
+        filename=f"{cnpj}_{timestamp}",
+        formato=formato,
+        csv_quote_all=True,
+        csv_decimal=",",
+    )
 
 
 def _extract_column(dados, column_name):
@@ -98,7 +105,13 @@ def _extract_column(dados, column_name):
 
 
 # @router.get("/download-tabela")
-def download_tabela(dados, filename="tabela_dados", formato: Literal["xlsx", "csv"] = "xlsx"):
+def download_tabela(
+    dados,
+    filename="tabela_dados",
+    formato: Literal["xlsx", "csv"] = "xlsx",
+    csv_quote_all: bool = False,
+    csv_decimal: str = ".",
+):
     """Em teste!"""
     # 1. Dados que você quer colocar na tabela
     # dados = [
@@ -113,7 +126,13 @@ def download_tabela(dados, filename="tabela_dados", formato: Literal["xlsx", "cs
     buffer = io.BytesIO()
     if formato == "csv":
         # separador ";" e BOM utf-8 para abrir corretamente no Excel em português
-        buffer.write(df.to_csv(index=False, sep=";").encode("utf-8-sig"))
+        csv_text = df.to_csv(
+            index=False,
+            sep=";",
+            decimal=csv_decimal,
+            quoting=csv.QUOTE_ALL if csv_quote_all else csv.QUOTE_MINIMAL,
+        )
+        buffer.write(csv_text.encode("utf-8-sig"))
         media_type = "text/csv"
     else:
         with pd.ExcelWriter(buffer, engine="openpyxl") as writer:

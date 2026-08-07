@@ -22,11 +22,11 @@ SELECT
       REGEXP_REPLACE(filial.CGC, '[^0-9]', '')     AS cnpjparceiro     -- CNPJ da Filial do Grupo Astoria
     , REGEXP_REPLACE(client.CGCENT, '[^0-9]', '')  AS cnpj             -- CNPJ (PJ) ou CPF (PF) do cliente na Receita Federal
     , REGEXP_REPLACE(client.TELENT, '[^0-9]', '')  AS telefone         -- Telefone principal de contato do cliente
-    , TO_CHAR(prest.DTEMISSAO, 'YYYY-MM-DD')       AS dtalancto        -- Data de lançamento da compra/título no sistema
+    , TO_CHAR(prest.DTEMISSAO, 'DD/MM/YYYY')       AS dtalancto        -- Data de lançamento da compra/título no sistema
     , TRIM(prest.DUPLIC)                           AS numdocumento     -- Número do documento de registro no sistema
     , prest.VALOR                                  AS valor            -- Valor do título (compras parceladas: uma linha por parcela)
-    , TO_CHAR(prest.DTBAIXA, 'YYYY-MM-DD')         AS dtacompensacao   -- Data em que foi efetuado o pagamento do título
-    , TO_CHAR(prest.DTVENC, 'YYYY-MM-DD')          AS dtavencimento    -- Data de início de contagem para vencimento do título
+    , TO_CHAR(prest.DTBAIXA, 'DD/MM/YYYY')         AS dtacompensacao   -- Data em que foi efetuado o pagamento do título
+    , TO_CHAR(prest.DTVENC, 'DD/MM/YYYY')          AS dtavencimento    -- Data de início de contagem para vencimento do título
 	
 FROM
     PCPREST prest
