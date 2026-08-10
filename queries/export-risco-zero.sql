@@ -27,7 +27,7 @@ SELECT
     , prest.VALOR                                  AS valor            -- Valor do título (compras parceladas: uma linha por parcela)
     , TO_CHAR(prest.DTBAIXA, 'DD/MM/YYYY')         AS dtacompensacao   -- Data em que foi efetuado o pagamento do título
     , TO_CHAR(prest.DTVENC, 'DD/MM/YYYY')          AS dtavencimento    -- Data de início de contagem para vencimento do título
-	, prest.CODCOB
+	-- , prest.CODCOB
 FROM
     PCPREST prest
     INNER JOIN PCCLIENT client
