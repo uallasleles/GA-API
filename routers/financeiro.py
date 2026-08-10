@@ -25,8 +25,8 @@ def _to_br_date_str(valor: date | None) -> str | None:
 @router.get("/1203-extrato-cliente")
 def query_1203_Extrato_Cliente(
     # current_user: Annotated[None, Depends(get_current_active_user)],
-    DATA_INICIAL: date = None,
-    DATA_FINAL: date = None,
+    DATA_INICIAL: date = Query(None, description="Data inicial do período (última compra válida). Formato ISO 8601.", examples=["2026-08-01"]),
+    DATA_FINAL: date = Query(None, description="Data final do período (última compra válida). Formato ISO 8601.", examples=["2026-08-10"]),
     # CODCLI = None,
     ):
     """ """
@@ -47,8 +47,8 @@ def query_1203_Extrato_Cliente(
 @router.get("/1203-extrato-cliente/download")
 def download_1203_Extrato_Cliente(
     # current_user: Annotated[None, Depends(get_current_active_user)],
-    DATA_INICIAL: date = None,
-    DATA_FINAL: date = None,
+    DATA_INICIAL: date = Query(None, description="Data inicial do período (última compra válida). Formato ISO 8601.", examples=["2026-08-01"]),
+    DATA_FINAL: date = Query(None, description="Data final do período (última compra válida). Formato ISO 8601.", examples=["2026-08-10"]),
     # CODCLI = None,
     ):
     """Exemplo de Cliente: 118018"""
@@ -70,10 +70,10 @@ def download_1203_Extrato_Cliente(
 @router.get("/export_risco_zero/download")
 def export_risco_zero(
     # current_user: Annotated[None, Depends(get_current_active_user)],
-    CODFILIAL = None,
-    DTEMISSAO_INICIAL: date = None,
-    DTEMISSAO_FINAL: date = None,
-    formato: Literal["xlsx", "csv"] = Query("xlsx", description="Formato do arquivo exportado"),
+    CODFILIAL: str = Query(None, description="Código da filial (CODFILIAL) no WinThor. Se omitido, retorna títulos de todas as filiais.", examples=["1"]),
+    DTEMISSAO_INICIAL: date = Query(None, description="Data inicial de emissão do título. Formato ISO 8601.", examples=["2026-08-01"]),
+    DTEMISSAO_FINAL: date = Query(None, description="Data final de emissão do título. Formato ISO 8601.", examples=["2026-08-10"]),
+    formato: Literal["xlsx", "csv"] = Query("xlsx", description="Formato do arquivo exportado: xlsx (padrão) ou csv (aspas duplas, separador ';', decimal ',').", examples=["xlsx"]),
     ):
     """
     FINALIDADE ..:  Extração de dados de Contas a Receber para exportação ao BigQuery da Risco Zero (gestão de dados, análise de crédito e avaliação de risco de inadimplência).   
