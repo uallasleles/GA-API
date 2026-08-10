@@ -18,9 +18,9 @@ router = APIRouter(
 )
 def r1106_GA01_Indice_de_Conclusao_de_Bonus(
     # current_user: User = Security(get_current_user, scopes=["estoque:read"]),
-    codfilial: str = None, 
-    dt_inicio: str = None, 
-    dt_fim: str = None
+    codfilial: str = Query(None, description="Código da filial (CODFILIAL) no WinThor.", examples=["1"]),
+    dt_inicio: str = Query(None, description="Data inicial do período de bônus. Formato DD-MM-YYYY.", examples=["01-08-2026"]),
+    dt_fim: str = Query(None, description="Data final do período de bônus. Formato DD-MM-YYYY.", examples=["10-08-2026"])
 ):
     """OBJETIVO: Calcular a volumetria de bônus por status (Fechados, Pendentes, Cancelados) e extrair o índice percentual de eficiência/vazão de recebimento do CD."""
     script = "queries/1106_ga_01_Indice_de_Conclusao_de_Bonus.sql"

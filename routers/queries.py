@@ -194,8 +194,8 @@ def query_Viagem_Veiculos(
 @router.get("/controll/carregamentos/")
 def query_Carregamentos(
     current_user: Annotated[None, Security(get_current_user, scopes=["carregamentos:read"])],
-    num_dias: str = None,
-    numcar: str = None
+    num_dias: str = Query(None, description="Número de dias retroativos a considerar. Ignorado se numcar for informado; padrão 1 dia se nenhum dos dois for enviado.", examples=["1"]),
+    numcar: str = Query(None, description="Número do carregamento (NUMCAR). Aceita correspondência parcial.", examples=["173990"])
 ):
     """Número da Transação de Exemplo: 38732"""
 
@@ -218,8 +218,8 @@ def query_Carregamentos(
 @router.get("/controll/monitoros")
 def query_Monitor_OS(
     current_user: Annotated[None, Security(get_current_user, scopes=["carregamentos:read"])],
-    codfilial: str = None,
-    numcar: str = None
+    codfilial: str = Query(None, description="Código da filial (CODFILIAL) no WinThor.", examples=["1"]),
+    numcar: str = Query(None, description="Número do carregamento (NUMCAR).", examples=["173990"])
 ):
     """Número da Transação de Exemplo: 38732"""
     sql = "queries/controll_monitor_os.sql"
@@ -300,7 +300,7 @@ def query_1464_Apuracao_Faturamento(
 @router.get("/r410-acertos-de-carga/informacoes-do-carregamento/")
 def r410_Acertos_de_Carga_Informacoes_do_Carregamento(
     current_user: Annotated[None, Security(get_current_user, scopes=["carregamento:read"])],
-    NUMCAR: str,
+    NUMCAR: str = Query(..., description="Número do carregamento (NUMCAR).", examples=["173990"]),
     ):
     """Exemplo de Carregamento: 173990"""
 
@@ -317,8 +317,8 @@ def r410_Acertos_de_Carga_Informacoes_do_Carregamento(
 
 @router.get("/r410-acertos-de-carga/notas-fiscais-romaneio/")
 def r410_Acertos_de_Carga_Notas_Fiscais_Romaneio(
-    NUMCAR: str,
-    CODFILIAL: str
+    NUMCAR: str = Query(..., description="Número do carregamento (NUMCAR).", examples=["173990"]),
+    CODFILIAL: str = Query(..., description="Código da filial (CODFILIAL) no WinThor.", examples=["1"])
     ):
     """Exemplo de Carregamento: 173990"""
 
@@ -352,8 +352,8 @@ def consulta_lock_carregamento(
 @router.post("/remove-lock-carregamento/")
 def remove_lock_carregamento(
     current_user: Annotated[None, Security(get_current_user, scopes=["admin"])],
-    CODUSUR = None,
-    NUMCAR = None
+    CODUSUR: str = Query(None, description="Código do usuário (CODUSUR) que gerou o lock a ser removido.", examples=["12345"]),
+    NUMCAR: str = Query(None, description="Número do carregamento (NUMCAR) travado.", examples=["173990"])
 ):
     """Remove lock de carregamento."""
 
