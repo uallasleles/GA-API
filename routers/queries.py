@@ -201,7 +201,7 @@ def query_Carregamentos(
 
     if numcar:
         num_dias = None
-    else:
+    elif not num_dias:
         num_dias = 1
 
     sql = "queries/controll_carregamentos.sql"
