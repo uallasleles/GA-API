@@ -1,6 +1,6 @@
 import csv
 import io
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 import pandas as pd
 from typing import Any, Dict, List, Literal
 from fastapi import APIRouter, Security, HTTPException, status, Query, Body
@@ -17,11 +17,16 @@ router = APIRouter(
 BRASILIA_TZ = timezone(timedelta(hours=-3))
 
 
+def _to_br_date_str(valor: date | None) -> str | None:
+    """Converte um date (vindo do seletor de calendário) para o formato DD/MM/YYYY esperado pelas queries."""
+    return valor.strftime("%d/%m/%Y") if valor else None
+
+
 @router.get("/1203-extrato-cliente")
 def query_1203_Extrato_Cliente(
     # current_user: Annotated[None, Depends(get_current_active_user)],
-    DATA_INICIAL: str = None,
-    DATA_FINAL: str = None,
+    DATA_INICIAL: date = None,
+    DATA_FINAL: date = None,
     # CODCLI = None,
     ):
     """ """
@@ -29,8 +34,8 @@ def query_1203_Extrato_Cliente(
     CODCLI = None
     sql = "queries/1203-consulta-clientes.sql"
     bind_variables = {
-        "DATA_INICIAL": DATA_INICIAL,
-        "DATA_FINAL": DATA_FINAL,
+        "DATA_INICIAL": _to_br_date_str(DATA_INICIAL),
+        "DATA_FINAL": _to_br_date_str(DATA_FINAL),
         "CODCLI": CODCLI
     }
     query = load_query(sql)
@@ -42,8 +47,8 @@ def query_1203_Extrato_Cliente(
 @router.get("/1203-extrato-cliente/download")
 def download_1203_Extrato_Cliente(
     # current_user: Annotated[None, Depends(get_current_active_user)],
-    DATA_INICIAL: str = None,
-    DATA_FINAL: str = None,
+    DATA_INICIAL: date = None,
+    DATA_FINAL: date = None,
     # CODCLI = None,
     ):
     """Exemplo de Cliente: 118018"""
@@ -51,8 +56,8 @@ def download_1203_Extrato_Cliente(
     CODCLI = None
     sql = "queries/1203-consulta-clientes.sql"
     bind_variables = {
-        "DATA_INICIAL": DATA_INICIAL,
-        "DATA_FINAL": DATA_FINAL,
+        "DATA_INICIAL": _to_br_date_str(DATA_INICIAL),
+        "DATA_FINAL": _to_br_date_str(DATA_FINAL),
         "CODCLI": CODCLI
     }
     query = load_query(sql)
@@ -66,8 +71,8 @@ def download_1203_Extrato_Cliente(
 def export_risco_zero(
     # current_user: Annotated[None, Depends(get_current_active_user)],
     CODFILIAL = None,
-    DTEMISSAO_INICIAL: str = None,
-    DTEMISSAO_FINAL: str = None,
+    DTEMISSAO_INICIAL: date = None,
+    DTEMISSAO_FINAL: date = None,
     formato: Literal["xlsx", "csv"] = Query("xlsx", description="Formato do arquivo exportado"),
     ):
     """
@@ -81,8 +86,8 @@ def export_risco_zero(
     sql = "queries/export-risco-zero.sql"
     bind_variables = {
         "CODFILIAL": CODFILIAL,
-        "DTEMISSAO_INICIAL": DTEMISSAO_INICIAL,
-        "DTEMISSAO_FINAL": DTEMISSAO_FINAL
+        "DTEMISSAO_INICIAL": _to_br_date_str(DTEMISSAO_INICIAL),
+        "DTEMISSAO_FINAL": _to_br_date_str(DTEMISSAO_FINAL)
     }
     query = load_query(sql)
     dados = queryAll2_Execute(query, bind_variables)
