@@ -2,9 +2,9 @@ import logging
 from dotenv import load_dotenv
 # FastAPI
 from fastapi import Depends, FastAPI
-from fastapi.openapi.docs import get_redoc_html
+from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 # Autenticacao
 from auth import Auth
 from auth.docs_auth import require_docs_session
@@ -46,73 +46,9 @@ app.include_router(docs_auth_router)
 app.include_router(admin_router)
 
 
-RAPIDOC_HTML = """<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>__TITLE__ - Docs</title>
-  <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
-</head>
-<body>
-  <rapi-doc
-    id="doc"
-    spec-url="/openapi.json"
-    render-style="read"
-    show-header="false"
-    allow-authentication="true"
-    persist-auth="true"
-    theme="light"
-    primary-color="#0f172a"
-  ></rapi-doc>
-
-  <script>
-    // O RapiDoc (assim como o Swagger UI) nao transforma parametros
-    // "format: date" em <input type="date"> por conta propria -- so faz
-    // isso pra campos de requestBody. Aqui a gente busca o schema, acha
-    // quais parametros sao "date" e troca o input depois que renderiza.
-    (async () => {
-      let dateParamNames = new Set();
-      try {
-        const spec = await (await fetch('/openapi.json')).json();
-        for (const path of Object.values(spec.paths || {})) {
-          for (const op of Object.values(path)) {
-            for (const p of (op.parameters || [])) {
-              if (p.schema && p.schema.format === 'date') {
-                dateParamNames.add(p.name);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        return;
-      }
-      if (dateParamNames.size === 0) return;
-
-      function patch(root) {
-        root.querySelectorAll('input[data-pname]').forEach((input) => {
-          if (dateParamNames.has(input.getAttribute('data-pname')) && input.type !== 'date') {
-            input.type = 'date';
-          }
-        });
-        root.querySelectorAll('*').forEach((el) => {
-          if (el.shadowRoot) patch(el.shadowRoot);
-        });
-      }
-
-      const doc = document.getElementById('doc');
-      doc.addEventListener('spec-loaded', () => patch(document));
-      // fallback: garante que roda mesmo se o evento ja tiver disparado
-      [300, 800, 1500, 3000].forEach((ms) => setTimeout(() => patch(document), ms));
-    })();
-  </script>
-</body>
-</html>
-"""
-
-
 @app.get("/docs", include_in_schema=False, dependencies=[Depends(require_docs_session)])
-async def rapidoc_ui():
-    return HTMLResponse(RAPIDOC_HTML.replace("__TITLE__", app.title))
+async def swagger_ui():
+    return get_swagger_ui_html(openapi_url="/openapi.json", title=f"{app.title} - Docs")
 
 
 @app.get("/redoc", include_in_schema=False, dependencies=[Depends(require_docs_session)])
