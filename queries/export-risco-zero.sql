@@ -48,7 +48,7 @@ WHERE 1=1
         , 'DESD'
     )   -- Exclui devoluções, bonificações, cancelados e desdobrados
     AND prest.VALOR > 0                               					-- Garante apenas títulos com valor a receber
-    AND prest.DUPLIC = 1225824
+    -- AND prest.DUPLIC = 1225824
     -- AND prest.DTPAG IS NULL                        					-- Apenas títulos não baixados
 
 ORDER BY 
