@@ -15,7 +15,8 @@ from admin.router import router as admin_router
 from routers import (
     queries,
     financeiro,
-    estoque
+    estoque,
+    frete
 )
 
 # Carregar variáveis de ambiente primeiro
@@ -70,6 +71,7 @@ async def root() -> RedirectResponse:
 WINTHOR_PREFIX = "/WinThor"
 app.include_router(financeiro.router)
 app.include_router(estoque.router)
+app.include_router(frete.router)
 app.include_router(queries.router,              prefix=WINTHOR_PREFIX, tags=["Queries"])
 app.include_router(Auth.router,                 prefix="/Auth", tags=["Authentication"])
 

@@ -329,6 +329,36 @@ def update_Execute(query, bind_variables):
             print(f"{cursor.rowcount} linha(s) atualizada(s).")
             return f"{cursor.rowcount} linha(s) atualizada(s)."
 
+def bulk_update_Execute(query, rows):
+    """
+    Executa a mesma query de UPDATE para várias linhas, no estilo
+    best-effort: cada linha é tentada individualmente e uma falha não
+    impede as demais. Um único commit no final grava as linhas que
+    deram certo (uma falha de statement no Oracle não invalida a
+    transação nem o cursor, só aquele UPDATE).
+
+    "rows" é uma lista de dicts com os bind variables de cada linha.
+    Retorna um resumo: {"atualizados", "nao_encontrados", "erros"}.
+    """
+    atualizados = 0
+    nao_encontrados = 0
+    erros = []
+    with OracleClient.MyConnection() as connection:
+        print(f"Oracle {connection.version}")
+        with connection.cursor() as cursor:
+            for indice, bind_variables in enumerate(rows, start=2):  # linha 1 da planilha é o cabeçalho
+                try:
+                    cursor.execute(query, bind_variables)
+                    if cursor.rowcount == 0:
+                        nao_encontrados += 1
+                        erros.append({"linha": indice, "erro": "Registro não encontrado para a chave informada."})
+                    else:
+                        atualizados += cursor.rowcount
+                except Exception as exc:
+                    erros.append({"linha": indice, "erro": str(exc)})
+        connection.commit()
+    return {"atualizados": atualizados, "nao_encontrados": nao_encontrados, "erros": erros}
+
 def queryAll_Execute(query, id):
     with OracleClient.MyConnection() as connection:
         print(f"Oracle {connection.version}")
