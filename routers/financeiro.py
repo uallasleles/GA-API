@@ -70,7 +70,7 @@ def download_1203_Extrato_Cliente(
 @router.get("/export_risco_zero/download")
 def export_risco_zero(
     # current_user: Annotated[None, Depends(get_current_active_user)],
-    CODFILIAL: str = Query("Cód. da Filial", description="Código da filial (CODFILIAL) no WinThor. Se omitido, retorna títulos de todas as filiais.", examples=["1"]),
+    CODFILIAL: Literal["1", "2", "12", "13"] = Query("1", description="Código da filial. Se omitido, retorna títulos de todas as filiais.", examples=["1"]),
     DTEMISSAO_INICIAL: date = Query("2025-07-31", description="Data inicial de emissão do título.", examples=["2026-08-01"]),  # noqa: B008
     DTEMISSAO_FINAL: date = Query("2026-12-31", description="Data final de emissão do título.", examples=["2026-08-10"]),  # noqa: B008
     NUM_DIAS: int = Query("7", description="Número de dias da última alteração dos títulos.", examples=["7"]),
