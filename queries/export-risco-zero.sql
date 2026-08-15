@@ -30,7 +30,9 @@ SELECT
     -- , TO_CHAR(prest.DTPAG , 'DD/MM/YYYY')        AS dtapagamento     -- Data em que foi efetuado o pagamento do título
     , TO_CHAR(prest.DTBAIXA, 'DD/MM/YYYY')          AS dtacompensacao   -- Data em que foi efetuado o pagamento do título
     , TO_CHAR(prest.DTVENC, 'DD/MM/YYYY')           AS dtavencimento    -- Data de início de contagem para vencimento do título
+    -- , TO_CHAR(prest.DTULTALTER, 'DD/MM/YYYY')       AS dtultalter    -- Data de início de contagem para vencimento do título
     -- , prest.CODCOB
+    -- , prest.*
 FROM
     PCPREST prest
     INNER JOIN PCCLIENT client
@@ -40,8 +42,9 @@ FROM
 
 WHERE 1=1 
     AND prest.CODFILIAL = NVL(:CODFILIAL, prest.CODFILIAL)           	-- filtra a(s) filial(is) que farão parte do envio
-    AND prest.DTEMISSAO >= TO_DATE(:DTEMISSAO_INICIAL, 'DD/MM/YYYY') 	-- janela de extração (incremental) - ex: última data já exportada
-    AND prest.DTEMISSAO <= TO_DATE(:DTEMISSAO_FINAL,   'DD/MM/YYYY')  
+    AND prest.DTEMISSAO >= TO_DATE(:DTEMISSAO_INICIAL,  'DD/MM/YYYY') 	-- janela de extração (incremental) - ex: última data já exportada
+    AND prest.DTEMISSAO <= TO_DATE(:DTEMISSAO_FINAL,    'DD/MM/YYYY')  
+    AND prest.DTULTALTER >= SYSDATE-NVL(:NUM_DIAS, 7)
     AND prest.CANCELDESD IS NULL                                     	-- exclui títulos com desdobramento cancelado
     AND prest.CODCOB NOT IN ( 
           'DEVT' 
