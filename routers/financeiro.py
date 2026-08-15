@@ -71,10 +71,10 @@ def download_1203_Extrato_Cliente(
 def export_risco_zero(
     # current_user: Annotated[None, Depends(get_current_active_user)],
     CODFILIAL: str = Query("Cód. da Filial", description="Código da filial (CODFILIAL) no WinThor. Se omitido, retorna títulos de todas as filiais.", examples=["1"]),
-    DTEMISSAO_INICIAL: date = Query("Data de Emissão Inicial", description="Data inicial de emissão do título.", examples=["2026-08-01"]),  # noqa: B008
-    DTEMISSAO_FINAL: date = Query("Data de Emissão Final", description="Data final de emissão do título.", examples=["2026-08-10"]),  # noqa: B008
-    NUM_DIAS: int = Query("Dias da Última Alteração", description="Número de dias da última alteração dos títulos.", examples=["7"]),
-    formato: Literal["xlsx", "csv"] = Query("xlsx", description="Formato do arquivo exportado: xlsx (padrão) ou csv (aspas duplas, separador ';', decimal ',').", examples=["xlsx"]),
+    DTEMISSAO_INICIAL: date = Query("2025-07-31", description="Data inicial de emissão do título.", examples=["2026-08-01"]),  # noqa: B008
+    DTEMISSAO_FINAL: date = Query("2026-12-31", description="Data final de emissão do título.", examples=["2026-08-10"]),  # noqa: B008
+    NUM_DIAS: int = Query("7", description="Número de dias da última alteração dos títulos.", examples=["7"]),
+    formato: Literal["xlsx", "csv"] = Query("csv", description="Formato do arquivo exportado: xlsx (padrão) ou csv (aspas duplas, separador ';', decimal ',').", examples=["xlsx"]),
     ):
     """
     FINALIDADE ..:  Extração de dados de Contas a Receber para exportação ao BigQuery da Risco Zero (gestão de dados, análise de crédito e avaliação de risco de inadimplência).   
