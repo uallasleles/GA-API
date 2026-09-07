@@ -2,6 +2,22 @@
 
 API FastAPI de integração entre o ERP (Oracle/WinThor) e sistemas parceiros, com autenticação JWT e usuários persistidos em PostgreSQL.
 
+## ⚠️ Problema conhecido: sem conectividade com o Oracle em produção
+
+Desde a migração do banco Oracle (WinThor), a aplicação em produção **não consegue se conectar ao banco** — todo endpoint que depende do Oracle (`/WinThor/Buscar/*`, `/Financeiro/*`, `/Estoque/*`, `/Frete/*`) retorna `500`.
+
+**Causa:** o DSN antigo (`ORACLEDB_DSN`) era um IP público direto (`144.22.139.64:1521/PROD`, mesmo IP do registro `rds.grupoastoria.com.br`), então não dependia de DNS nem de rota de rede especial a partir da VM (`srv-automator-01`, Google Cloud). O novo DSN (`winthordb.grupoastoria.com.br:1521/WINT`) é um hostname que:
+1. **Não existe no DNS público** (`NXDOMAIN` via `8.8.8.8`) — só resolve dentro da rede interna da empresa.
+2. Mesmo resolvendo, aponta para `10.200.10.100`, um **IP privado** — testado via console do container no Portainer (`socket.create_connection(('10.200.10.100', 1521))`), resultado: **timeout**. A VM no Google Cloud não tem nenhuma rota até essa rede.
+3. A VPN existente (`vpn.grupoastoria.com.br`) é de acesso remoto para usuários/laptops, não uma conexão site-to-site que inclua a VM — não resolve o problema.
+
+**Isso é infraestrutura, não código** — nenhum ajuste em `.env`/DNS sozinho resolve sem existir um caminho de rede real entre o Google Cloud e o `10.200.10.100`. Dois caminhos possíveis, a decidir com quem administra a rede da empresa e o projeto no Google Cloud:
+
+1. **VPN site-to-site (ou Cloud Interconnect)** entre o VPC do Google Cloud e a rede interna — mantém o Oracle inteiramente privado, mas exige configuração em ambos os lados (o roteador/firewall da empresa precisa suportar IPsec site-to-site).
+2. **Reabrir uma exposição controlada do Oracle**, como antes da migração — IP público no novo servidor + regra de firewall liberando só o IP da VM (`34.41.206.42`) na porta 1521. Mais rápido, mas reduz o isolamento que a migração para IP privado buscou.
+
+Até isso ser resolvido, os endpoints que não dependem do Oracle continuam funcionando normalmente: `/Auth/token`, o painel `/admin` e a documentação `/docs`/`/redoc` (todos usam só o Postgres da própria aplicação).
+
 ## Build e teste local (Docker)
 
 ```bash
