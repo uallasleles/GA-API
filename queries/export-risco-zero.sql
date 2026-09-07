@@ -34,10 +34,10 @@ SELECT
     -- , prest.CODCOB
     -- , prest.*
 FROM
-    PCPREST prest
-    INNER JOIN PCCLIENT client
+    CHOCOSUL.PCPREST prest
+    INNER JOIN CHOCOSUL.PCCLIENT client
         ON client.CODCLI = prest.CODCLI
-	INNER JOIN PCFILIAL filial 
+	INNER JOIN CHOCOSUL.PCFILIAL filial
 		ON prest.CODFILIAL = filial.CODIGO
 
 WHERE 1=1 

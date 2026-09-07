@@ -1,7 +1,7 @@
 SELECT 
     M.NUMOS,
     (SELECT COUNT(1)
-     FROM pcMovEndPend x
+     FROM CHOCOSUL.pcMovEndPend x
      WHERE x.CODFILIAL = '1'
         AND x.DATA BETWEEN TRUNC(SYSDATE)-1 AND TRUNC(SYSDATE)
         AND NVL(X.NUMPED, 0) = NVL(M.NUMPED, 0) 
@@ -20,13 +20,13 @@ SELECT
         WHEN m.TIPOOS in (13)   THEN MAX(NVL(M.NUMVOL,0))                                                                                                                     
         WHEN M.TIPOOS = 20      THEN (  SELECT SUM(NUMVOL) 
                                         FROM (
-                                            SELECT NUMOS, CODPROD, CODENDERECO, MAX(NVL(NUMVOL, 0)) NUMVOL 
-                                            FROM PCMOVENDPEND 
-                                            WHERE TIPOOS = 20 AND DTESTORNO IS NULL 
-                                            GROUP BY NUMOS, CODPROD, CODENDERECO) 
-                                        WHERE NUMOS = M.NUMOS 
+                                            SELECT NUMOS, CODPROD, CODENDERECO, MAX(NVL(NUMVOL, 0)) NUMVOL
+                                            FROM CHOCOSUL.PCMOVENDPEND
+                                            WHERE TIPOOS = 20 AND DTESTORNO IS NULL
+                                            GROUP BY NUMOS, CODPROD, CODENDERECO)
+                                        WHERE NUMOS = M.NUMOS
                                         GROUP BY NUMOS  )
-        WHEN M.TIPOOS = 22      THEN (  SELECT COUNT(1) AS QTVOLUME FROM PCVOLUMEOS WHERE NUMOS = M.NUMOS AND DTESTORNO IS NULL )
+        WHEN M.TIPOOS = 22      THEN (  SELECT COUNT(1) AS QTVOLUME FROM CHOCOSUL.PCVOLUMEOS WHERE NUMOS = M.NUMOS AND DTESTORNO IS NULL )
                                 ELSE (  ROUND(SUM(m.qt)/MAX(p.qtunitcx))  )
     END AS TOTVOL, 
     SUM(
@@ -37,7 +37,7 @@ SELECT
                     THEN (NVL(M.QTPECAS,CEIL( M.QT / DECODE(P1.PESOPECA,0,1,NULL,1,P1.PESOPECA)))) 
                     ELSE 0 
                 END                                                                                 
-            FROM PCPRODUT P1  
+            FROM CHOCOSUL.PCPRODUT P1
             WHERE P1.CODPROD = M.CODPROD
         )
     ) TOTPECAS,                                                                                                             
@@ -57,22 +57,22 @@ SELECT
     CASE WHEN (COUNT(m.DTFIMSEPARACAO) = COUNT(1)     OR COUNT(m.DTFIMOS) = COUNT(1)) AND COUNT(1) > 0   THEN 'S' ELSE 'N' END AS SEPARADO, 
     CASE WHEN (COUNT(m.DTINICIOCONFERENCIA) >= 1     AND COUNT(m.DTFIMOS) < COUNT(1)) AND COUNT(1) > 0   THEN 'S' ELSE 'N' END AS EM_CONFERENCIA, 
     CASE WHEN (COUNT(m.DTFIMCONFERENCIA) = COUNT(1)   OR COUNT(m.DTFIMOS) = COUNT(1)) AND COUNT(1) > 0   THEN 'S' ELSE 'N' END AS CONFERIDO, 
-    NVL((SELECT MIN(DEPOSITO) 
-        FROM PCENDERECO                                                                                                                                                         
+    NVL((SELECT MIN(DEPOSITO)
+        FROM CHOCOSUL.PCENDERECO
         WHERE EXISTS (
-            SELECT 1 FROM PCMOVENDPEND 
-            WHERE CODENDERECOORIG = PCENDERECO.CODENDERECO 
-                AND DATA BETWEEN TRUNC(SYSDATE)-1 AND TRUNC(SYSDATE) 
+            SELECT 1 FROM CHOCOSUL.PCMOVENDPEND
+            WHERE CODENDERECOORIG = PCENDERECO.CODENDERECO
+                AND DATA BETWEEN TRUNC(SYSDATE)-1 AND TRUNC(SYSDATE)
                 AND NUMOS = M.NUMOS)), 1
-    ) DEPOSITOORIG,                                                                                                                    
-    NVL((SELECT MIN(DEPOSITO)                                                                                                                                                      
-        FROM PCENDERECO                                                                                                                                                         
-    WHERE EXISTS (SELECT 1                                                                                                                                                   
-                    FROM PCMOVENDPEND                                                                                                                                        
-                    WHERE CODENDERECO = PCENDERECO.CODENDERECO                                                                                                                
+    ) DEPOSITOORIG,
+    NVL((SELECT MIN(DEPOSITO)
+        FROM CHOCOSUL.PCENDERECO
+    WHERE EXISTS (SELECT 1
+                    FROM CHOCOSUL.PCMOVENDPEND
+                    WHERE CODENDERECO = PCENDERECO.CODENDERECO
                     AND DATA BETWEEN TRUNC(SYSDATE)-1 AND TRUNC(SYSDATE)
                         AND NUMOS = M.NUMOS)), 1
-    ) DEPOSITODEST, 
+    ) DEPOSITODEST,
     CASE                                                                                                                                                                      
         when M.NUMBONUS     > 0  THEN 'B - ' || M.NUMBONUS                                                                                                                   
         when M.NUMCAR       > 0  THEN 'C - ' || M.NUMCAR                                                                                                                     
@@ -80,9 +80,9 @@ SELECT
         when M.NUMTRANS     > 0  THEN 'T - ' || M.NUMTRANS                                                                                                                   
                                  ELSE 'T - ' || M.CODROTINA                                                                                                                                    
     END MOVIMENT 
-FROM PCMOVENDPEND M,                                                                                                                                                           
-    PCTIPOOS S,                                                                                                                                                               
-    PCPRODUT P                                                                                                                                                                
+FROM CHOCOSUL.PCMOVENDPEND M,
+    CHOCOSUL.PCTIPOOS S,
+    CHOCOSUL.PCPRODUT P
 WHERE M.CODPROD = P.CODPROD                                                                                                                                                     
     AND M.TIPOOS = S.CODIGO                                                                                                                                                       
     AND M.NUMOS > 0                                                                                                                                                               

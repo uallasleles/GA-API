@@ -38,7 +38,7 @@ FROM (
         -- Valor financeiro total que entrou no pátio do CD
         SUM(NVL(c.valortotal, 0)) AS valor_total_patio
 
-    FROM pcbonusc c
+    FROM CHOCOSUL.pcbonusc c
     
     WHERE c.codfilial = :CODFILIAL
       AND TRUNC(c.databonus) BETWEEN TO_DATE(:DT_INICIO, 'DD-MM-YYYY') AND TO_DATE(:DT_FIM, 'DD-MM-YYYY')

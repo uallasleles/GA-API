@@ -34,15 +34,15 @@ SELECT
     C.OBS4,
     C.OBS5
 
-FROM 
-    PCCLIENT C
-    
+FROM
+    CHOCOSUL.PCCLIENT C
+
 -- Limita a consulta apenas aos clientes que compraram no período enviado
 INNER JOIN (
-    SELECT 
-        PC.CODCLI, 
+    SELECT
+        PC.CODCLI,
         MAX(PC.DATA) AS DTULTCOMP_VALIDA
-    FROM PCPEDC PC
+    FROM CHOCOSUL.PCPEDC PC
     WHERE PC.CONDVENDA IN (1, 5, 8, 14, 20)
     GROUP BY PC.CODCLI
     HAVING MAX(PC.DATA) BETWEEN TO_DATE(:DATA_INICIAL, 'DD/MM/YYYY') AND TO_DATE(:DATA_FINAL, 'DD/MM/YYYY')
