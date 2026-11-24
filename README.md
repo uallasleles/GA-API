@@ -88,6 +88,7 @@ Ver [.env.example](.env.example) para a lista completa. Resumo:
 | `DOCS_USERNAME`, `DOCS_PASSWORD` | Credenciais de acesso à página de login de `/docs` e `/openapi.json` |
 | `DOCS_SESSION_SECRET` | Chave de assinatura do cookie de sessão do login de `/docs` — gerar com `openssl rand -hex 32` |
 | `ADMIN_SESSION_SECRET` | Chave de assinatura do cookie de sessão do painel `/admin` — gerar com `openssl rand -hex 32` |
+| `RHGESTOR_EMAIL_*`, `RHGESTOR_KEY_*` (`TESTE`/`PRODUCAO`), `RHGESTOR_BASE_URL` | Credenciais da API da Sólides (RHGestor) — só por variável de ambiente |
 | `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Credenciais do Postgres da aplicação (usuários) |
 | `DATABASE_URL` | Montada automaticamente no `docker-compose.yml` a partir das variáveis `POSTGRES_*` |
 
@@ -96,6 +97,10 @@ Ver [.env.example](.env.example) para a lista completa. Resumo:
 ## Documentação (/docs)
 
 `/docs` e `/openapi.json` ficam atrás de uma tela de login própria (`/docs-login`) — cookie de sessão assinado, válido por 8h, credenciais fixas em `DOCS_USERNAME`/`DOCS_PASSWORD` (não tem relação com os usuários do Postgres nem com o fluxo de token via `/Auth/token`, que continua público e sem essa proteção). Ver [auth/docs_auth.py](auth/docs_auth.py).
+
+## Envio de CSVs ao RHGestor (Sólides)
+
+Rotas `/RHGestor/Validar/{layout}`, `/RHGestor/Importar/{layout}` e `/RHGestor/Historico`, com o escopo `rhgestor:importar`. Credenciais só por variáveis de ambiente (`RHGESTOR_EMAIL_TESTE`/`RHGESTOR_KEY_TESTE` e as `_PRODUCAO`); a tabela de histórico é criada pela migração `0004`. Uso, validações e conversões: [docs/api-rhgestor.md](docs/api-rhgestor.md). Testes: `uv run pytest`.
 
 ## Usuários e permissões (/admin)
 

@@ -16,7 +16,8 @@ from routers import (
     queries,
     financeiro,
     estoque,
-    frete
+    frete,
+    rhgestor
 )
 
 # Carregar variáveis de ambiente primeiro
@@ -72,6 +73,7 @@ WINTHOR_PREFIX = "/WinThor"
 app.include_router(financeiro.router)
 app.include_router(estoque.router)
 app.include_router(frete.router)
+app.include_router(rhgestor.router)
 app.include_router(queries.router,              prefix=WINTHOR_PREFIX, tags=["Queries"])
 app.include_router(Auth.router,                 prefix="/Auth", tags=["Authentication"])
 
