@@ -6,5 +6,6 @@ AVAILABLE_SCOPES = {
     "frete:read": "Permissão para consultar a tabela de frete",
     "frete:write": "Permissão para atualizar valores da tabela de frete",
     "rhgestor:importar": "Permissão para enviar/validar CSVs ao RHGestor (Sólides) e consultar o histórico de envios",
+    "restricao:read": "Permissão para simular restrições de venda (rotina 391) e gerar os scripts, sem gravar",
     "admin": "Permissão de administrador",
 }
