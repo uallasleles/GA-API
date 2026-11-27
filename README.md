@@ -102,6 +102,10 @@ Ver [.env.example](.env.example) para a lista completa. Resumo:
 
 Rotas `/RHGestor/Validar/{layout}`, `/RHGestor/Importar/{layout}` e `/RHGestor/Historico`, com o escopo `rhgestor:importar`. Credenciais só por variáveis de ambiente (`RHGESTOR_EMAIL_TESTE`/`RHGESTOR_KEY_TESTE` e as `_PRODUCAO`); a tabela de histórico é criada pela migração `0004`. Uso, validações e conversões: [docs/api-rhgestor.md](docs/api-rhgestor.md). Testes: `uv run pytest`.
 
+## Simulação de restrições de venda (rotina 391)
+
+Rota `/Vendas/restricoes/simular`, com o escopo `restricao:read`: recebe uma planilha de clientes e prazos, confere no Oracle (somente leitura) e gera os scripts para execução manual. A API não grava restrições. Uso e regras: [docs/api-restricoes-venda.md](docs/api-restricoes-venda.md).
+
 ## Usuários e permissões (/admin)
 
 Os usuários antes hardcoded em `auth/Auth.py` (`fake_users_db`) agora vivem na tabela `user` do Postgres. Permissões não são mais uma lista de scopes por usuário — são atribuídas via **papéis (roles)**: cada papel tem um conjunto de scopes, e cada usuário tem um ou mais papéis. Os scopes efetivos de um usuário são a união dos scopes de todos os seus papéis (calculado em `auth/Auth.py:get_user`).
